@@ -1,35 +1,31 @@
 import React from 'react';
-import {
-  Text,
-  View,
-} from 'react-native';
 
-import { TamaguiProvider, createTamagui, styled } from '@tamagui/core';
+import { TamaguiProvider, createTamagui} from '@tamagui/core';
 import config from '@tamagui/config/v3'
-import { Button } from '@tamagui/button';
 
-import { dark } from './lib/color';
+import { NavigationContainer } from '@react-navigation/native';
+
+import HomeScreen from './src/screens/Home';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AlertScreen from './src/screens/Alert';
 
 // Create tamagui instance from config
 const tamaguiConfig = createTamagui(config)
 
-const TestButton = styled(Button, {
-  backgroundColor: dark.colors.blue.hex,
-  color: "#f38ba8",
-  pressStyle: {
-    backgroundColor: "#eba0ac"
-  }
-})
+// Create a bottom tab navigator
+const Tab = createBottomTabNavigator()
 
 const App = (): React.JSX.Element => {
-  return <TamaguiProvider config={tamaguiConfig}>
-    <View>
-      <Text>
-        This is the header
-      </Text>
-      <TestButton >Hello world</TestButton>
-    </View>
-  </TamaguiProvider>
+  return (
+    <TamaguiProvider config={tamaguiConfig}>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Alert" component={AlertScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </TamaguiProvider>
+  )
 }
 
 export default App;
