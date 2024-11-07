@@ -2,18 +2,22 @@
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
     // ... other configs, if any
-    "baseUrl": [ "./" ],
+    "baseUrl": "./",
     "paths": {
       "@lib/*": [
         "./lib/*"
       ],
       "@screens/*": [
         "./src/screens/*"
+      ],
+      "@assets/*": [
+        "./assets/*"
       ]
     }
   },
   "include": [
     "./src/screens/*",
-    "./lib/*"
+    "./lib/*",
+    "./assets/*"
   ]
 }
