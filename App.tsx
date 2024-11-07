@@ -5,9 +5,12 @@ import config from '@tamagui/config/v3'
 
 import { NavigationContainer } from '@react-navigation/native';
 
-import HomeScreen from './src/screens/Home';
+import HomeScreen from '@screens/Home';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AlertScreen from './src/screens/Alert';
+import AlertScreen from '@screens/Alert';
+import FindDeviceScreen from '@screens/FindDevice';
+import DeviceManagementScreen from '@screens/DeviceManagement';
+import SettingScreen from '@screens/Settings';
 
 // Create tamagui instance from config
 const tamaguiConfig = createTamagui(config)
@@ -22,6 +25,9 @@ const App = (): React.JSX.Element => {
         <Tab.Navigator>
           <Tab.Screen name="Home" component={HomeScreen} />
           <Tab.Screen name="Alert" component={AlertScreen} />
+          <Tab.Screen name="FindDevice" component={FindDeviceScreen} />
+          <Tab.Screen name="DeviceManagement" component={DeviceManagementScreen} />
+          <Tab.Screen name="Setting" component={SettingScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </TamaguiProvider>

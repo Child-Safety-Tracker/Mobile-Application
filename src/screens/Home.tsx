@@ -4,7 +4,7 @@ import React from "react";
 const HomeScreen = () => {
   return (
     <View>
-      <Text fontSize={20} fontWeight={100}>This is the home screen</Text>
+      <Text alignSelf="center" fontSize={20} fontWeight={100}>This is the home screen</Text>
     </View>
   )
 }
