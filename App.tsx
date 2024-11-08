@@ -1,6 +1,6 @@
 import React from 'react';
-
 import {TamaguiProvider, createTamagui} from '@tamagui/core';
+
 import config from '@tamagui/config/v3';
 
 import Navigator from './src/navigator/Navigator';
