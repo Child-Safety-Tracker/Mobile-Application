@@ -29,6 +29,8 @@ import SettingIconFill from '@assets/navigator/settings-fill.svg';
 // @ts-ignore
 import SettingIconLine from '@assets/navigator/settings-line.svg';
 
+import {dark} from '../../lib/color';
+
 // Create a bottom tab navigator
 const Tab = createBottomTabNavigator();
 
@@ -39,6 +41,9 @@ const Navigator = () => {
         screenOptions={({route}) => ({
           headerShown: false,
           tabBarShowLabel: false,
+          tabBarStyle: {
+            backgroundColor: dark.colors.base.hex,
+          },
           tabBarItemStyle: {
             // A top padding of 5 to center the icon vertically
             paddingTop: 5,
@@ -49,16 +54,32 @@ const Navigator = () => {
             switch (route.name) {
               case 'Home':
                 returnedIcon = focused ? (
-                  <HomeIconFill width={size} height={size} fill={'#000000'} />
+                  <HomeIconFill
+                    width={size}
+                    height={size}
+                    fill={dark.colors.teal.hex}
+                  />
                 ) : (
-                  <HomeIconLine width={size} height={size} fill={'#000000'} />
+                  <HomeIconLine
+                    width={size}
+                    height={size}
+                    fill={dark.colors.text.hex}
+                  />
                 );
                 break;
               case 'Alert':
                 returnedIcon = focused ? (
-                  <AlertIconFill width={size} height={size} fill={'#000000'} />
+                  <AlertIconFill
+                    width={size}
+                    height={size}
+                    fill={dark.colors.teal.hex}
+                  />
                 ) : (
-                  <AlertIconLine width={size} height={size} fill={'#000000'} />
+                  <AlertIconLine
+                    width={size}
+                    height={size}
+                    fill={dark.colors.text.hex}
+                  />
                 );
                 break;
               case 'FindDevice':
@@ -66,13 +87,13 @@ const Navigator = () => {
                   <FindDeviceIconFill
                     width={size}
                     height={size}
-                    fill={'#000000'}
+                    fill={dark.colors.teal.hex}
                   />
                 ) : (
                   <FindDeviceIconLine
                     width={size}
                     height={size}
-                    fill={'#000000'}
+                    fill={dark.colors.text.hex}
                   />
                 );
                 break;
@@ -81,13 +102,13 @@ const Navigator = () => {
                   <DevicesIconFill
                     width={size}
                     height={size}
-                    fill={'#000000'}
+                    fill={dark.colors.teal.hex}
                   />
                 ) : (
                   <DevicesIconLine
                     width={size}
                     height={size}
-                    fill={'#000000'}
+                    fill={dark.colors.text.hex}
                   />
                 );
                 break;
@@ -96,13 +117,13 @@ const Navigator = () => {
                   <SettingIconFill
                     width={size}
                     height={size}
-                    fill={'#000000'}
+                    fill={dark.colors.teal.hex}
                   />
                 ) : (
                   <SettingIconLine
                     width={size}
                     height={size}
-                    fill={'#000000'}
+                    fill={dark.colors.text.hex}
                   />
                 );
                 break;
