@@ -13,10 +13,10 @@ let userName = 'Kiet';
 const HomeHeading = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.Welcome}>
-        Hi, <Text style={styles.UserName}>{userName}</Text>
+      <Text style={styles.welcome}>
+        Hi, <Text style={styles.userName}>{userName}</Text>
       </Text>
-      <View style={styles.NotificationContainer}>
+      <View style={styles.notificationContainer}>
         <NotificationIconLine
           width={25}
           height={25}
