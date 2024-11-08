@@ -8,9 +8,7 @@ import HomeMap from './components/Home.Map';
 import {Text} from '@tamagui/core';
 
 import {fontSize} from '@lib/fontSize';
-
-// @ts-ignore
-import MapPinIconLine from '@assets/icons/screens/home/map-pin-line.svg';
+import HomeDeviceInfo from './components/Home.DeviceInfo';
 
 let deviceNum = 2;
 const HomeScreen = () => {
@@ -30,50 +28,7 @@ const HomeScreen = () => {
           }}>
           Devices - <Text>{deviceNum}</Text>
         </Text>
-        <View>
-          <View style={{flexDirection: 'row'}}>
-            <View
-              style={{
-                padding: 12,
-                backgroundColor: dark.colors.base.hex,
-                borderRadius: 10,
-              }}>
-              <MapPinIconLine
-                width={20}
-                height={20}
-                color={dark.colors.green.hex}
-              />
-            </View>
-            <View
-              style={{
-                marginLeft: 10,
-              }}>
-              <Text
-                style={{
-                  fontSize: fontSize.text.medium,
-                  color: dark.colors.text.hex,
-                }}>
-                Device name
-              </Text>
-              <Text
-                style={{
-                  fontSize: fontSize.text.medium,
-                  color: dark.colors.text.hex,
-                  opacity: 0.5,
-                }}>
-                Location
-              </Text>
-            </View>
-          </View>
-          <Text
-            style={{
-              fontSize: fontSize.text.medium,
-              color: dark.colors.text.hex,
-              opacity: 0.5,
-            }}>
-            Last Update: 5 min ago
-          </Text>
-        </View>
+        <HomeDeviceInfo />
       </View>
     </View>
   );
