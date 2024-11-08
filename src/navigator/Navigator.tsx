@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import HomeScreen from '../screens/Home';
+import HomeScreen from '../screens/home/Home';
 import AlertScreen from '../screens/Alert';
 import FindDeviceScreen from '../screens/FindDevice';
 import DeviceManagementScreen from '../screens/DeviceManagement';
@@ -9,25 +9,25 @@ import SettingScreen from '../screens/Settings';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 // @ts-ignore
-import HomeIconFill from '@assets/navigator/home-fill.svg';
+import HomeIconFill from '@assets/icons/navigator/home-fill.svg';
 // @ts-ignore
-import HomeIconLine from '@assets/navigator/home-line.svg';
+import HomeIconLine from '@assets/icons/navigator/home-line.svg';
 // @ts-ignore
-import AlertIconFill from '@assets/navigator/error-warning-fill.svg';
+import AlertIconFill from '@assets/icons/navigator/error-warning-fill.svg';
 // @ts-ignore
-import AlertIconLine from '@assets/navigator/error-warning-line.svg';
+import AlertIconLine from '@assets/icons/navigator/error-warning-line.svg';
 // @ts-ignore
-import FindDeviceIconFill from '@assets/navigator/search-fill.svg';
+import FindDeviceIconFill from '@assets/icons/navigator/search-fill.svg';
 // @ts-ignore
-import FindDeviceIconLine from '@assets/navigator/search-line.svg';
+import FindDeviceIconLine from '@assets/icons/navigator/search-line.svg';
 // @ts-ignore
-import DevicesIconFill from '@assets/navigator/instance-fill.svg';
+import DevicesIconFill from '@assets/icons/navigator/instance-fill.svg';
 // @ts-ignore
-import DevicesIconLine from '@assets/navigator/instance-line.svg';
+import DevicesIconLine from '@assets/icons/navigator/instance-line.svg';
 // @ts-ignore
-import SettingIconFill from '@assets/navigator/settings-fill.svg';
+import SettingIconFill from '@assets/icons/navigator/settings-fill.svg';
 // @ts-ignore
-import SettingIconLine from '@assets/navigator/settings-line.svg';
+import SettingIconLine from '@assets/icons/navigator/settings-line.svg';
 
 import {dark} from '../../lib/color';
 
