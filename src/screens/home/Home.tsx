@@ -22,6 +22,7 @@ const HomeScreen = () => {
         }}>
         <Text
           style={{
+            flex: 0.25,
             color: dark.colors.text.hex,
             fontSize: fontSize.heading.smallMedium,
             fontWeight: 'bold',

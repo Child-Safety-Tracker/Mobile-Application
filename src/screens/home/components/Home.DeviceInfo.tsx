@@ -59,6 +59,7 @@ const HomeDeviceInfo = () => {
         </View>
         <Text
           style={{
+            marginTop: 5,
             fontSize: fontSize.text.medium,
             color: dark.colors.text.hex,
             opacity: 0.5,
