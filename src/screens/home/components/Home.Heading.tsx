@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
 
   welcome: {
-    fontSize: fontSize.largeHeading,
+    fontSize: fontSize.heading.large,
     fontWeight: 'bold',
     color: dark.colors.text.hex,
   },
