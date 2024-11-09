@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Text} from '@tamagui/core';
 
 import {dark} from '@lib/color';
@@ -8,68 +8,79 @@ import {fontSize} from '@lib/fontSize';
 // @ts-ignore
 import MapPinIconLine from '@assets/icons/screens/home/map-pin-line.svg';
 
+// @ts-ignore
 import ArrowRightIconLine from '@assets/icons/screens/home/arrow-right-circle-line.svg';
 
 const HomeDeviceInfo = () => {
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        backgroundColor: dark.colors.base.hex,
-        borderRadius: 10,
-        padding: 12,
-        paddingRight: 20,
-      }}>
+    <View style={styles.container}>
       <View>
-        <View style={{flexDirection: 'row'}}>
-          <View
-            style={{
-              padding: 12,
-              backgroundColor: dark.colors.mantle.hex,
-              borderRadius: 10,
-            }}>
+        <View style={styles.locationInfoContainer}>
+          <View style={styles.mapPinIconContainer}>
             <MapPinIconLine
               width={20}
               height={20}
               color={dark.colors.green.hex}
             />
           </View>
-          <View
-            style={{
-              marginLeft: 10,
-            }}>
-            <Text
-              style={{
-                fontSize: fontSize.text.medium,
-                color: dark.colors.text.hex,
-              }}>
-              Device name
-            </Text>
-            <Text
-              style={{
-                fontSize: fontSize.text.medium,
-                color: dark.colors.text.hex,
-                opacity: 0.5,
-              }}>
-              Location
-            </Text>
+          <View style={styles.locationInfo}>
+            <Text style={styles.deviceName}>Device name</Text>
+            <Text style={styles.deviceLocation}>Location</Text>
           </View>
         </View>
-        <Text
-          style={{
-            marginTop: 5,
-            fontSize: fontSize.text.medium,
-            color: dark.colors.text.hex,
-            opacity: 0.5,
-          }}>
-          Last Update: 5 min ago
-        </Text>
+        <Text style={styles.lastUpdate}>Last Update: 5 min ago</Text>
       </View>
-      <ArrowRightIconLine width={30} height={30} color={dark.colors.text.hex} />
+      <ArrowRightIconLine
+        borderWidth={5}
+        width={30}
+        height={30}
+        color={dark.colors.text.hex}
+      />
     </View>
   );
 };
 
 export default HomeDeviceInfo;
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: dark.colors.base.hex,
+    borderRadius: 10,
+    padding: 12,
+    paddingRight: 20,
+  },
+
+  locationInfoContainer: {
+    flexDirection: 'row',
+  },
+
+  mapPinIconContainer: {
+    padding: 12,
+    backgroundColor: dark.colors.mantle.hex,
+    borderRadius: 10,
+  },
+
+  locationInfo: {
+    marginLeft: 10,
+    fontSize: fontSize.text.medium,
+  },
+
+  deviceName: {
+    color: dark.colors.text.hex,
+  },
+
+  deviceLocation: {
+    color: dark.colors.text.hex,
+    opacity: 0.5,
+  },
+
+  lastUpdate: {
+    marginTop: 5,
+    fontSize: fontSize.text.medium,
+    color: dark.colors.text.hex,
+    opacity: 0.5,
+  },
+});

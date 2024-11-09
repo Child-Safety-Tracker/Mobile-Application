@@ -29,7 +29,9 @@ const HomeScreen = () => {
           }}>
           Devices - <Text>{deviceNum}</Text>
         </Text>
-        <HomeDeviceInfo />
+        <View style={styles.deviceInfoContainer}>
+          <HomeDeviceInfo />
+        </View>
       </View>
     </View>
   );
@@ -39,10 +41,14 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 25,
+    paddingHorizontal: 20,
     paddingTop: 20,
     backgroundColor: dark.colors.crust.hex,
     flex: 1,
     flexDirection: 'column',
+  },
+
+  deviceInfoContainer: {
+    flex: 0.75,
   },
 });
