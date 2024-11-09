@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Animated} from 'react-native';
 
 import {dark} from '@lib/color.ts';
 
@@ -9,6 +9,24 @@ import {Text} from '@tamagui/core';
 
 import {fontSize} from '@lib/fontSize';
 import HomeDeviceInfo from './components/Home.DeviceInfo';
+import FlatList = Animated.FlatList;
+
+const devices = [
+  {
+    id: 1,
+    deviceName: 'Device 1',
+  },
+  {
+    id: 2,
+    deviceName: 'Device 2',
+  },
+  {
+    id: 3,
+    deviceName: 'Device 3',
+  },
+];
+
+const Separator = () => <View style={{height: 10}} />;
 
 let deviceNum = 2;
 const HomeScreen = () => {
@@ -30,7 +48,16 @@ const HomeScreen = () => {
           Devices - <Text>{deviceNum}</Text>
         </Text>
         <View style={styles.deviceInfoContainer}>
-          <HomeDeviceInfo />
+          <FlatList
+            data={devices}
+            showsVerticalScrollIndicator={false}
+            initialScrollIndex={0}
+            keyExtractor={(item, index) => index.toString()}
+            ItemSeparatorComponent={Separator}
+            renderItem={({item}) => (
+              <HomeDeviceInfo deviceName={item.deviceName} />
+            )}
+          />
         </View>
       </View>
     </View>
@@ -50,5 +77,6 @@ const styles = StyleSheet.create({
 
   deviceInfoContainer: {
     flex: 0.75,
+    justifyContent: 'space-between',
   },
 });

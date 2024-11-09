@@ -11,7 +11,7 @@ import MapPinIconLine from '@assets/icons/screens/home/map-pin-line.svg';
 // @ts-ignore
 import ArrowRightIconLine from '@assets/icons/screens/home/arrow-right-circle-line.svg';
 
-const HomeDeviceInfo = () => {
+const HomeDeviceInfo = ({deviceName}: any) => {
   return (
     <View style={styles.container}>
       <View>
@@ -24,7 +24,7 @@ const HomeDeviceInfo = () => {
             />
           </View>
           <View style={styles.locationInfo}>
-            <Text style={styles.deviceName}>Device name</Text>
+            <Text style={styles.deviceName}>{deviceName}</Text>
             <Text style={styles.deviceLocation}>Location</Text>
           </View>
         </View>
