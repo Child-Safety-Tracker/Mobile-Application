@@ -1,10 +1,10 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import HomeScreen from '../screens/home/Home';
-import AlertScreen from '../screens/Alert';
-import FindDeviceScreen from '../screens/FindDevice';
-import DeviceManagementScreen from '../screens/DeviceManagement';
-import SettingScreen from '../screens/Settings';
+import HomeScreen from '@screens/home/Home';
+import AlertScreen from '@screens/alert/Alert';
+import FindDeviceScreen from '@screens/FindDevice';
+import DeviceManagementScreen from '@screens/DeviceManagement';
+import SettingScreen from '@screens/Settings';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
