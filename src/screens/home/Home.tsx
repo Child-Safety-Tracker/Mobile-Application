@@ -33,8 +33,12 @@ let deviceNum = 2;
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <HomeHeading />
-      <HomeMap />
+      <View style={styles.homeHeadingWrapper}>
+        <HomeHeading />
+      </View>
+      <View style={styles.homeMapWrapper} >
+        <HomeMap />
+      </View>
       <View style={styles.deviceInfoContainer}>
         <Text style={styles.deviceInfoHeader}>
           Devices - <Text>{deviceNum}</Text>
@@ -70,16 +74,25 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 
+
+  homeHeadingWrapper: {
+    flex: 0.1,
+  },
+
+  homeMapWrapper: {
+    flex: 0.5,
+  },
+
+  deviceInfoContainer: {
+    flex: 0.4,
+  },
+
   deviceInfoHeader: {
     flex: 0.2,
     color: dark.colors.text.hex,
     fontSize: fontSize.heading.smallMedium,
     fontWeight: 'bold',
     textAlignVertical: 'center',
-  },
-
-  deviceInfoContainer: {
-    flex: 0.4,
   },
 
   deviceInfoList: {

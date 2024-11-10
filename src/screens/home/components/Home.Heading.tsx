@@ -31,7 +31,6 @@ export default HomeHeading;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
