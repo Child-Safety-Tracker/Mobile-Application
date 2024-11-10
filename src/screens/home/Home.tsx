@@ -35,20 +35,11 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <HomeHeading />
       <HomeMap />
-      <View
-        style={{
-          flex: 0.4,
-        }}>
-        <Text
-          style={{
-            flex: 0.2,
-            color: dark.colors.text.hex,
-            fontSize: fontSize.heading.smallMedium,
-            fontWeight: 'bold',
-          }}>
+      <View style={styles.deviceInfoContainer}>
+        <Text style={styles.deviceInfoHeader}>
           Devices - <Text>{deviceNum}</Text>
         </Text>
-        <View style={styles.deviceInfoContainer}>
+        <View style={styles.deviceInfoList}>
           <FlatList
             data={devices}
             showsVerticalScrollIndicator={false}
@@ -56,7 +47,10 @@ const HomeScreen = () => {
             keyExtractor={(item, index) => index.toString()}
             ItemSeparatorComponent={Separator}
             renderItem={({item, index}) => (
-              <HomeDeviceInfo deviceName={item.deviceName} deviceColor={Object.values(deviceColors)[index]} />
+              <HomeDeviceInfo
+                deviceName={item.deviceName}
+                deviceColor={Object.values(deviceColors)[index]}
+              />
             )}
           />
         </View>
@@ -76,7 +70,19 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 
+  deviceInfoHeader: {
+    flex: 0.2,
+    color: dark.colors.text.hex,
+    fontSize: fontSize.heading.smallMedium,
+    fontWeight: 'bold',
+    textAlignVertical: 'center',
+  },
+
   deviceInfoContainer: {
+    flex: 0.4,
+  },
+
+  deviceInfoList: {
     flex: 0.8,
     justifyContent: 'space-between',
   },
