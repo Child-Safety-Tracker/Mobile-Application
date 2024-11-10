@@ -1,8 +1,12 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Mapbox from '@rnmapbox/maps';
+
 import AlertHeading from './components/Alert.Heading';
 import AlertConfiguration from './components/Alert.Configuration';
+import AlertMap from './components/Alert.Map';
+import AlertDeviceSelection from './components/Alert.DeviceSelection';
+
 import {dark} from '@lib/colors/theme';
 
 // @ts-ignore
@@ -44,22 +48,11 @@ const AlertScreen = () => {
           configValue2={''}
         />
       </View>
-      <View
-        style={{
-          flex: 0.1,
-        }}></View>
-      <View
-        style={{
-          flex: 0.67,
-          justifyContent: 'center',
-        }}>
-        <Mapbox.MapView
-          style={{
-            flex: 0.8,
-            borderRadius: 20,
-            overflow: 'hidden',
-          }}
-        />
+      <View style={styles.alertDeviceSelectionWrapper}>
+        <AlertDeviceSelection />
+      </View>
+      <View style={styles.alertMapWrapper}>
+        <AlertMap />
       </View>
     </View>
   );
@@ -86,5 +79,14 @@ const styles = StyleSheet.create({
 
   alertConfigurationSeparator: {
     width: 20,
+  },
+
+  alertDeviceSelectionWrapper: {
+    flex: 0.15,
+    justifyContent: 'center',
+  },
+
+  alertMapWrapper: {
+    flex: 0.62,
   },
 });
