@@ -1,12 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, Animated} from 'react-native';
+import {Text, View, StyleSheet, Animated} from 'react-native';
 
 import {dark} from '@lib/colors/theme.ts';
 import {deviceColors} from '@lib/colors/device';
 
 import HomeHeading from './components/Home.Heading';
 import HomeMap from './components/Home.Map';
-import {Text} from '@tamagui/core';
 
 import {fontSize} from '@lib/fontSize';
 import HomeDeviceInfo from './components/Home.DeviceInfo';

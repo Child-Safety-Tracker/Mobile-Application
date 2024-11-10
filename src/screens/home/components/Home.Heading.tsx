@@ -1,7 +1,5 @@
 import React from 'react';
-import {Text, StyleSheet} from 'react-native';
-
-import {View} from '@tamagui/core';
+import {View, Text, StyleSheet} from 'react-native';
 
 // @ts-ignore
 import NotificationIconLine from '@assets/icons/screens/home/notification-line.svg';

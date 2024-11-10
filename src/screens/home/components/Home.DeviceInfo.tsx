@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Text} from '@tamagui/core';
+import {StyleSheet, View, Text} from 'react-native';
 
 import {dark} from '@lib/colors/theme';
 import {fontSize} from '@lib/fontSize';

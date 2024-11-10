@@ -1,12 +1,14 @@
-import { Text, View } from "@tamagui/core";
-import React from "react";
+import React from 'react';
+import {Text, View} from 'react-native';
 
 const SettingScreen = () => {
   return (
     <View>
-      <Text alignSelf="center" fontSize={20} fontWeight={100}>This is the find device screen</Text>
+      <Text>
+        This is the find device screen
+      </Text>
     </View>
-  )
-}
+  );
+};
 
-export default SettingScreen
+export default SettingScreen;
