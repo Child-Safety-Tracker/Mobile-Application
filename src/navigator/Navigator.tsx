@@ -42,7 +42,7 @@ const Navigator = () => {
           headerShown: false,
           tabBarShowLabel: false,
           tabBarStyle: {
-            backgroundColor: dark.colors.base.hex,
+            backgroundColor: dark.colors.mantle.hex,
           },
           tabBarItemStyle: {
             // A top padding of 5 to center the icon vertically
