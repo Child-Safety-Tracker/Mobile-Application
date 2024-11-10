@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from '@tamagui/core';
 
-import {dark} from '@lib/color';
+import {dark} from '@lib/colors/theme';
 import {fontSize} from '@lib/fontSize';
 
 // @ts-ignore
@@ -11,7 +11,7 @@ import MapPinIconLine from '@assets/icons/screens/home/map-pin-line.svg';
 // @ts-ignore
 import ArrowRightIconLine from '@assets/icons/screens/home/arrow-right-circle-line.svg';
 
-const HomeDeviceInfo = ({deviceName}: any) => {
+const HomeDeviceInfo = ({deviceName, deviceColor}: {deviceName: string, deviceColor: string}) => {
   return (
     <View style={styles.container}>
       <View>
@@ -20,7 +20,7 @@ const HomeDeviceInfo = ({deviceName}: any) => {
             <MapPinIconLine
               width={20}
               height={20}
-              color={dark.colors.green.hex}
+              color={deviceColor}
             />
           </View>
           <View style={styles.locationInfo}>

@@ -1,7 +1,8 @@
 import React from 'react';
 import {View, StyleSheet, Animated} from 'react-native';
 
-import {dark} from '@lib/color.ts';
+import {dark} from '@lib/colors/theme.ts';
+import {deviceColors} from '@lib/colors/device';
 
 import HomeHeading from './components/Home.Heading';
 import HomeMap from './components/Home.Map';
@@ -36,11 +37,11 @@ const HomeScreen = () => {
       <HomeMap />
       <View
         style={{
-          flex: 0.35,
+          flex: 0.4,
         }}>
         <Text
           style={{
-            flex: 0.25,
+            flex: 0.2,
             color: dark.colors.text.hex,
             fontSize: fontSize.heading.smallMedium,
             fontWeight: 'bold',
@@ -54,8 +55,8 @@ const HomeScreen = () => {
             initialScrollIndex={0}
             keyExtractor={(item, index) => index.toString()}
             ItemSeparatorComponent={Separator}
-            renderItem={({item}) => (
-              <HomeDeviceInfo deviceName={item.deviceName} />
+            renderItem={({item, index}) => (
+              <HomeDeviceInfo deviceName={item.deviceName} deviceColor={Object.values(deviceColors)[index]} />
             )}
           />
         </View>
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
   },
 
   deviceInfoContainer: {
-    flex: 0.75,
+    flex: 0.8,
     justifyContent: 'space-between',
   },
 });

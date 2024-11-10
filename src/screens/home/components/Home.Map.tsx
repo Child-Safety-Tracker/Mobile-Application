@@ -19,7 +19,7 @@ export default HomeMap;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.55,
+    flex: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
   },

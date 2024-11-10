@@ -29,7 +29,7 @@ import SettingIconFill from '@assets/icons/navigator/settings-fill.svg';
 // @ts-ignore
 import SettingIconLine from '@assets/icons/navigator/settings-line.svg';
 
-import {dark} from '../../lib/color';
+import {dark} from '@lib/colors/theme';
 
 // Create a bottom tab navigator
 const Tab = createBottomTabNavigator();

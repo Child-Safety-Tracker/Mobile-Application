@@ -6,7 +6,7 @@ import {View} from '@tamagui/core';
 // @ts-ignore
 import NotificationIconLine from '@assets/icons/screens/home/notification-line.svg';
 import {fontSize} from '@lib/fontSize';
-import {dark} from '@lib/color';
+import {dark} from '@lib/colors/theme';
 
 let userName = 'Kiet';
 
