@@ -1,13 +1,19 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import {dark} from '@lib/colors/theme';
 import AlertHeading from './components/Alert.Heading';
+import AlertConfiguration from './components/Alert.Configuration';
 
 const AlertScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.alertHeadingWrapper}>
         <AlertHeading />
+      </View>
+      <View style={styles.alertConfigurationWrapper}>
+        <AlertConfiguration />
+        <View style={styles.alertConfigurationSeparator} />
+        <AlertConfiguration />
       </View>
     </View>
   );
@@ -25,5 +31,14 @@ const styles = StyleSheet.create({
 
   alertHeadingWrapper: {
     flex: 0.1,
+  },
+
+  alertConfigurationWrapper: {
+    flex: 0.15,
+    flexDirection: 'row',
+  },
+
+  alertConfigurationSeparator: {
+    width: 20,
   },
 });
