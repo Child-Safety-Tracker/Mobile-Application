@@ -1,13 +1,19 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {dark} from '@lib/colors/theme';
+import Mapbox from '@rnmapbox/maps';
 import AlertHeading from './components/Alert.Heading';
 import AlertConfiguration from './components/Alert.Configuration';
+import {dark} from '@lib/colors/theme';
 
 // @ts-ignore
 import FlagFillIcon from '@assets/icons/screens/alert/flag-fill.svg';
 // @ts-ignore
 import BoundaryLineIcon from '@assets/icons/screens/alert/boundary-line.svg';
+
+// @ts-ignore
+import {OPEN_MAP_PUBLIC_KEY} from '@env';
+
+Mapbox.setAccessToken(OPEN_MAP_PUBLIC_KEY);
 
 const ReferenceIcon = () => (
   <FlagFillIcon width={20} height={20} fill={dark.colors.text.hex} />
@@ -36,6 +42,23 @@ const AlertScreen = () => {
           configName={'Boundary'}
           configValue1={'100m'}
           configValue2={''}
+        />
+      </View>
+      <View
+        style={{
+          flex: 0.1,
+        }}></View>
+      <View
+        style={{
+          flex: 0.67,
+          justifyContent: 'center',
+        }}>
+        <Mapbox.MapView
+          style={{
+            flex: 0.8,
+            borderRadius: 20,
+            overflow: 'hidden',
+          }}
         />
       </View>
     </View>
