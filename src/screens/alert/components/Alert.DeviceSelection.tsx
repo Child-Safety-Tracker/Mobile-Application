@@ -1,11 +1,14 @@
 import React from 'react';
-import {View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
-
-import AlertDevice from './Alert.Device';
 
 import {dark} from '@lib/colors/theme';
 
+// @ts-ignore
+import ArrowUpIconFill from '@assets/icons/screens/alert/arrow-up-fill.svg';
+// @ts-ignore
+import ArrowDownIconFill from '@assets/icons/screens/alert/arrow-down-fill.svg';
+// @ts-ignore
 import MapIconLine from '@assets/icons/screens/alert/map-pin-line.svg';
 
 const devices = [
@@ -25,16 +28,11 @@ const devices = [
 
 const AlertDeviceSelection = () => {
   const [value, setValue] = React.useState('');
-  const [isFocused, setIsFocused] = React.useState();
+  const [isFocused, setIsFocused] = React.useState(false);
 
   return (
     <Dropdown
-      style={{
-        backgroundColor: dark.colors.base.hex,
-        borderRadius: 10,
-        paddingHorizontal: 20,
-        flex: 0.5,
-      }}
+      style={styles.container}
       containerStyle={{
         borderWidth: 0,
         borderRadius: 10,
@@ -57,9 +55,33 @@ const AlertDeviceSelection = () => {
       renderLeftIcon={() => (
         <MapIconLine width={20} height={20} fill={dark.colors.green.hex} />
       )}
-      onChange={item => setValue(item.value)}
+      renderRightIcon={() =>
+        isFocused ? (
+          <ArrowUpIconFill width={20} height={20} fill={dark.colors.text.hex} />
+        ) : (
+          <ArrowDownIconFill
+            width={20}
+            height={20}
+            fill={dark.colors.text.hex}
+          />
+        )
+      }
+      onChange={item => {
+        setValue(item.value);
+        setIsFocused(false);
+      }}
+      onFocus={() => setIsFocused(true)}
     />
   );
 };
 
 export default AlertDeviceSelection;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: dark.colors.base.hex,
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    flex: 0.5,
+  },
+});
