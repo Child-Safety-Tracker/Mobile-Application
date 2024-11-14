@@ -33,21 +33,12 @@ const AlertDeviceSelection = () => {
   return (
     <Dropdown
       style={styles.container}
-      containerStyle={{
-        borderWidth: 0,
-        borderRadius: 10,
-        backgroundColor: dark.colors.surface0.hex,
-      }}
-      itemContainerStyle={{
-        borderRadius: 10,
-      }}
-      itemTextStyle={{
-        paddingLeft: 10,
-        color: dark.colors.text.hex,
-      }}
+      containerStyle={styles.listContainer}
+      itemContainerStyle={styles.itemContainer}
+      itemTextStyle={styles.text}
       activeColor={dark.colors.base.hex}
-      selectedTextStyle={{paddingLeft: 10, color: dark.colors.text.hex}}
-      placeholderStyle={{paddingLeft: 10, color: dark.colors.text.hex}}
+      selectedTextStyle={styles.text}
+      placeholderStyle={styles.text}
       data={devices}
       value={devices[0]}
       labelField={'label'}
@@ -83,5 +74,20 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 20,
     flex: 0.5,
+  },
+
+  listContainer: {
+    borderWidth: 0,
+    borderRadius: 10,
+    backgroundColor: dark.colors.surface0.hex,
+  },
+
+  itemContainer: {
+    borderRadius: 10,
+  },
+
+  text: {
+    paddingLeft: 10,
+    color: dark.colors.text.hex,
   },
 });
