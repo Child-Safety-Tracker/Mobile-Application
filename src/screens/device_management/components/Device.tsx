@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View, Text, Switch} from 'react-native';
 
 import {dark} from '@lib/colors/theme';
 import {fontSize} from '@lib/fontSize';
@@ -10,30 +10,36 @@ import MapPinIconLine from '@assets/icons/screens/home/map-pin-line.svg';
 // @ts-ignore
 import ArrowRightIconLine from '@assets/icons/screens/home/arrow-right-circle-line.svg';
 
-const HomeDeviceInfo = ({deviceName, deviceColor}: {deviceName: string, deviceColor: string}) => {
+const HomeDeviceInfo = ({
+  deviceName,
+  deviceColor,
+}: {
+  deviceName: string;
+  deviceColor: string;
+}) => {
+  const [isEnabled, setIsEnabled] = React.useState(false);
   return (
     <View style={styles.container}>
       <View>
         <View style={styles.locationInfoContainer}>
           <View style={styles.mapPinIconContainer}>
-            <MapPinIconLine
-              width={20}
-              height={20}
-              color={deviceColor}
-            />
+            <MapPinIconLine width={20} height={20} color={deviceColor} />
           </View>
           <View style={styles.locationInfo}>
             <Text style={styles.deviceName}>{deviceName}</Text>
-            <Text style={styles.deviceLocation}>Location</Text>
+            <Text style={styles.deviceLocation}>Added on: </Text>
           </View>
         </View>
         <Text style={styles.lastUpdate}>Last Update: 5 min ago</Text>
       </View>
-      <ArrowRightIconLine
-        borderWidth={5}
-        width={30}
-        height={30}
-        color={dark.colors.text.hex}
+      <Switch
+        value={isEnabled}
+        trackColor={{
+          false: dark.colors.surface0.hex,
+          true: dark.colors.surface1.hex,
+        }}
+        thumbColor={isEnabled ? dark.colors.teal.hex : dark.colors.text.hex}
+        onValueChange={() => setIsEnabled(!isEnabled)}
       />
     </View>
   );
@@ -77,7 +83,7 @@ const styles = StyleSheet.create({
   },
 
   lastUpdate: {
-    marginTop: 5,
+    marginTop: 3,
     fontSize: fontSize.text.medium,
     color: dark.colors.text.hex,
     opacity: 0.5,
