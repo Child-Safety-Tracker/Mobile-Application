@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
+import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 
 import Device from './components/Device';
-import DeviceManagementHeading from './components/DeviceManagement.Heading'
+import DeviceManagementHeading from './components/DeviceManagement.Heading';
 
 import {dark} from '@lib/colors/theme';
 import {deviceColors} from '@lib/colors/device';
@@ -48,6 +48,24 @@ const DeviceManagementScreen = () => {
           )}
         />
       </View>
+      <TouchableOpacity
+        style={{
+          bottom: 20,
+          height: 50,
+          alignItems: 'center',
+          justifyContent: 'center',
+          alignSelf: 'center',
+          aspectRatio: 1,
+          borderRadius: '100%',
+          backgroundColor: dark.colors.teal.hex,
+        }}>
+        <Text
+          style={{
+            color: dark.colors.crust.hex,
+          }}>
+          +
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -64,5 +82,5 @@ const styles = StyleSheet.create({
 
   deviceManagementHeadingWrapper: {
     flex: 0.1,
-  }
+  },
 });
