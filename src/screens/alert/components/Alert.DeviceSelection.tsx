@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: dark.colors.base.hex,
     borderRadius: 10,
     paddingHorizontal: 20,
-    flex: 0.5,
+    flex: 0.6,
   },
 
   listContainer: {

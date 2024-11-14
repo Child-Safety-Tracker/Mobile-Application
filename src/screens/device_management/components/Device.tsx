@@ -1,34 +1,35 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React from 'react';
+import {StyleSheet, View, Text} from 'react-native';
 
 import {dark} from '@lib/colors/theme';
 import {fontSize} from '@lib/fontSize';
 
 // @ts-ignore
 import MapPinIconLine from '@assets/icons/screens/home/map-pin-line.svg';
+
 // @ts-ignore
-import ArrowDownFill from '@assets/icons/screens/alert/arrow-down-fill.svg';
+import ArrowRightIconLine from '@assets/icons/screens/home/arrow-right-circle-line.svg';
 
-
-const AlertDevice = () => {
-  const [selectedDevice, setSelectedDevice] = useState();
-
+const HomeDeviceInfo = ({deviceName, deviceColor}: {deviceName: string, deviceColor: string}) => {
   return (
     <View style={styles.container}>
-      <View style={styles.locationInfoContainer}>
-        <View style={styles.mapPinIconContainer}>
-          <MapPinIconLine
-            width={20}
-            height={20}
-            color={dark.colors.green.hex}
-          />
+      <View>
+        <View style={styles.locationInfoContainer}>
+          <View style={styles.mapPinIconContainer}>
+            <MapPinIconLine
+              width={20}
+              height={20}
+              color={deviceColor}
+            />
+          </View>
+          <View style={styles.locationInfo}>
+            <Text style={styles.deviceName}>{deviceName}</Text>
+            <Text style={styles.deviceLocation}>Location</Text>
+          </View>
         </View>
-        <View style={styles.locationInfo}>
-          <Text style={styles.deviceName}>{'device'}</Text>
-          <Text style={styles.deviceLocation}>Location</Text>
-        </View>
+        <Text style={styles.lastUpdate}>Last Update: 5 min ago</Text>
       </View>
-      <ArrowDownFill
+      <ArrowRightIconLine
         borderWidth={5}
         width={30}
         height={30}
@@ -38,7 +39,7 @@ const AlertDevice = () => {
   );
 };
 
-export default AlertDevice;
+export default HomeDeviceInfo;
 
 const styles = StyleSheet.create({
   container: {
