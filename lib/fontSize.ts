@@ -7,8 +7,10 @@ export const fontSize = {
     small: 20,
   },
   text: {
-    small: 10,
-    medium: 15,
     large: 20,
+    mediumLarge: 17,
+    medium: 15,
+    smallMedium: 13,
+    small: 10,
   },
 };
