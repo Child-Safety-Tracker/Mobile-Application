@@ -2,9 +2,11 @@ import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
 import {dark} from '@lib/colors/theme';
+import {fontSize} from '../../../lib/fontSize';
 
 import SettingsUserInfo from './components/Settings.UserInfo';
 import SettingsOption from './components/Settings.Option';
+import Separator from '../../components/Separator';
 
 const SettingScreen = () => {
   return (
@@ -12,7 +14,24 @@ const SettingScreen = () => {
       <View style={styles.userInfoWrapper}>
         <SettingsUserInfo />
       </View>
-      <SettingsOption label={'Language'} value={'English'} />
+      <View style={styles.optionsWrapper}>
+        <SettingsOption label={'Language'} value={'English'} />
+        <Separator height={15} />
+        <Text
+          style={{
+            color: dark.colors.text.hex,
+            fontSize: fontSize.heading.small,
+            lineHeight: fontSize.heading.small,
+            fontWeight: 'bold',
+          }}>
+          User
+        </Text>
+        <Separator height={15} />
+        <SettingsOption label={'Username'} value={'Tuan Kiet'} />
+        <Separator height={20} />
+        <SettingsOption label={'Email'} value={'user@gmail.com'} />
+        <Separator height={20} />
+      </View>
     </View>
   );
 };
@@ -28,5 +47,9 @@ const styles = StyleSheet.create({
 
   userInfoWrapper: {
     flex: 0.45,
+  },
+
+  optionsWrapper: {
+    flex: 0.55,
   },
 });

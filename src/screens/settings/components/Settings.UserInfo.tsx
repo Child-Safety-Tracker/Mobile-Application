@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
   },
 
   imageContainer: {
-    flex: 35,
+    flex: 30,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
 
   imageWrapper: {
-    flex: 0.7,
+    flex: 0.8,
     overflow: 'hidden',
     borderRadius: '100%',
     aspectRatio: 1,
