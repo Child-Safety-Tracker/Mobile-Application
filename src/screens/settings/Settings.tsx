@@ -8,6 +8,11 @@ import SettingsUserInfo from './components/Settings.UserInfo';
 import SettingsOption from './components/Settings.Option';
 import Separator from '../../components/Separator';
 
+// @ts-ignore
+import EarthIconLine from '@assets/icons/screens/settings/earth-line.svg';
+import PencilIcon from '@assets/icons/screens/settings/pencil-fill.svg';
+import UserIcon from '@assets/icons/screens/settings/user-fill.svg';
+
 const SettingScreen = () => {
   return (
     <View style={styles.container}>
@@ -15,7 +20,13 @@ const SettingScreen = () => {
         <SettingsUserInfo />
       </View>
       <View style={styles.optionsWrapper}>
-        <SettingsOption label={'Language'} value={'English'} />
+        <SettingsOption
+          icon={
+            <EarthIconLine width={20} height={20} fill={dark.colors.text.hex} />
+          }
+          label={'Language'}
+          value={'English'}
+        />
         <Separator height={15} />
         <Text
           style={{
@@ -27,9 +38,19 @@ const SettingScreen = () => {
           User
         </Text>
         <Separator height={15} />
-        <SettingsOption label={'Username'} value={'Tuan Kiet'} />
+        <SettingsOption
+          icon={<UserIcon width={20} height={20} fill={dark.colors.text.hex} />}
+          label={'Username'}
+          value={'Tuan Kiet'}
+        />
         <Separator height={20} />
-        <SettingsOption label={'Email'} value={'user@gmail.com'} />
+        <SettingsOption
+          icon={
+            <PencilIcon width={20} height={20} fill={dark.colors.text.hex} />
+          }
+          label={'Email'}
+          value={'user@gmail.com'}
+        />
         <Separator height={20} />
       </View>
     </View>

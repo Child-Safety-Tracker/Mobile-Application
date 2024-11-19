@@ -4,14 +4,18 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {dark} from '../../../../lib/colors/theme';
 import {fontSize} from '../../../../lib/fontSize';
 
-import EarthIconLine from '@assets/icons/screens/settings/earth-line.svg';
-
-const SettingsOption = ({label, value}: {label: string; value: string}) => {
+const SettingsOption = ({
+  label,
+  value,
+  icon,
+}: {
+  label: string;
+  value: string;
+  icon: any;
+}) => {
   return (
     <TouchableOpacity style={styles.container}>
-      <View style={styles.iconContainer}>
-        <EarthIconLine width={20} height={20} fill={dark.colors.text.hex} />
-      </View>
+      <View style={styles.iconContainer}>{icon}</View>
       <View style={styles.textContainer}>
         <Text style={styles.label}>{label}</Text>
         <Text style={styles.value}>{value}</Text>
