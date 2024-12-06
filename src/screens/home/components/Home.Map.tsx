@@ -4,7 +4,7 @@ import Mapbox, {Camera, PointAnnotation} from '@rnmapbox/maps';
 
 import {LocationContext} from '../../../context/location.context';
 
-import MapPinFillIcon from '@assets/icons/screens/home/map-pin-line.svg';
+import MapPinFillIcon from '@assets/icons/screens/home/map-pin-fill.svg';
 
 // @ts-ignore
 import {OPEN_MAP_PUBLIC_KEY} from '@env';
@@ -23,12 +23,13 @@ const HomeMap = () => {
   // @ts-ignore
   return isLoading ? null : (
     <View style={styles.container}>
-      <Mapbox.MapView style={styles.map}>
-        <PointAnnotation
-          coordinate={coordinates!}
-          id={''}
-        >
-          <MapPinFillIcon width={20} height={20} color={'white'} />
+      <Mapbox.MapView
+        logoEnabled={false}
+        compassEnabled={false}
+        attributionEnabled={false}
+        style={styles.map}>
+        <PointAnnotation coordinate={coordinates!} id={''}>
+          <MapPinFillIcon width={25} height={25} color={'white'} />
         </PointAnnotation>
         <Camera centerCoordinate={coordinates} zoomLevel={18} />
       </Mapbox.MapView>
