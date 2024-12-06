@@ -10,7 +10,7 @@ const LocationContextProvider = (props: any) => {
 
   useEffect(() => {
     setIsLoading(true);
-    location_request('http://192.168.251.89:1234/location', {
+    location_request('http://192.168.167.89:1234/location', {
       privateKey: 'hUotVQIdoniIfacuUNHahmnNK98GRV6+kn+sOQ==',
       ids: ['afirx1LlNk5vh7BnbGukU+L8o9E3pHhd/uogNOdmdv8='],
     })
