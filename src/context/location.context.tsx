@@ -5,34 +5,32 @@ import {location_request} from '../APIs/location/location';
 export const LocationContext = createContext({});
 
 const LocationContextProvider = (props: any) => {
-  const [location, setLocation] = React.useState({});
+  const [location, setLocation] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const locationFetchingAwait = async () => {
-      const locationResult = await location_request(
-        'http://192.168.69.89:1234/location',
-        {
-          privateKey: 'hUotVQIdoniIfacuUNHahmnNK98GRV6+kn+sOQ==',
-          ids: ['afirx1LlNk5vh7BnbGukU+L8o9E3pHhd/uogNOdmdv8='],
-        },
-      );
-      setLocation(locationResult);
-    };
-    locationFetchingAwait()
-      .then(() => {
-        console.log('[Location] Fetched successfully');
+    setIsLoading(true);
+    location_request('http://192.168.251.89:1234/location', {
+      privateKey: 'hUotVQIdoniIfacuUNHahmnNK98GRV6+kn+sOQ==',
+      ids: ['afirx1LlNk5vh7BnbGukU+L8o9E3pHhd/uogNOdmdv8='],
+    })
+      .then(result => {
+        console.log(result);
+        setLocation(result);
+        setIsLoading(false);
+        console.log('[Location] Successfully fetched locations');
       })
       .catch(error => {
-        console.log('[location] Fetched error: ');
+        console.log('[Location] Failed to fetch locations');
         console.log(error);
       });
   }, []);
 
   return (
-    <LocationContext.Provider value={{location: location}}>
+    <LocationContext.Provider
+      value={{location: location, isLoading: isLoading}}>
       {props.children}
     </LocationContext.Provider>
   );
 };
-
 export default LocationContextProvider;
