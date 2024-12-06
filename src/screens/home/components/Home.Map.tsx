@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Mapbox from '@rnmapbox/maps';
+
+import {LocationContext} from '../../../context/location.context';
 
 // @ts-ignore
 import {OPEN_MAP_PUBLIC_KEY} from '@env';
@@ -8,6 +10,8 @@ import {OPEN_MAP_PUBLIC_KEY} from '@env';
 Mapbox.setAccessToken(OPEN_MAP_PUBLIC_KEY);
 
 const HomeMap = () => {
+  const {location}: any = useContext(LocationContext);
+  console.log(location);
   return (
     <View style={styles.container}>
       <Mapbox.MapView style={styles.map} />

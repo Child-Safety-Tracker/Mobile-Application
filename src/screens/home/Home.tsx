@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Text, View, StyleSheet, Animated} from 'react-native';
 
 import {dark} from '@lib/colors/theme.ts';
@@ -10,6 +10,8 @@ import HomeMap from './components/Home.Map';
 import {fontSize} from '@lib/fontSize';
 import HomeDeviceInfo from './components/Home.DeviceInfo';
 import FlatList = Animated.FlatList;
+
+import LocationContextProvider from '../../context/location.context';
 
 const devices = [
   {
@@ -31,34 +33,36 @@ const Separator = () => <View style={{height: 10}} />;
 let deviceNum = 2;
 const HomeScreen = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.homeHeadingWrapper}>
-        <HomeHeading />
-      </View>
-      <View style={styles.homeMapWrapper} >
-        <HomeMap />
-      </View>
-      <View style={styles.deviceInfoContainer}>
-        <Text style={styles.deviceInfoHeader}>
-          Devices - <Text>{deviceNum}</Text>
-        </Text>
-        <View style={styles.deviceInfoList}>
-          <FlatList
-            data={devices}
-            showsVerticalScrollIndicator={false}
-            initialScrollIndex={0}
-            keyExtractor={(item, index) => index.toString()}
-            ItemSeparatorComponent={Separator}
-            renderItem={({item, index}) => (
-              <HomeDeviceInfo
-                deviceName={item.deviceName}
-                deviceColor={Object.values(deviceColors)[index]}
-              />
-            )}
-          />
+    <LocationContextProvider>
+      <View style={styles.container}>
+        <View style={styles.homeHeadingWrapper}>
+          <HomeHeading />
+        </View>
+        <View style={styles.homeMapWrapper}>
+          <HomeMap />
+        </View>
+        <View style={styles.deviceInfoContainer}>
+          <Text style={styles.deviceInfoHeader}>
+            Devices - <Text>{deviceNum}</Text>
+          </Text>
+          <View style={styles.deviceInfoList}>
+            <FlatList
+              data={devices}
+              showsVerticalScrollIndicator={false}
+              initialScrollIndex={0}
+              keyExtractor={(item, index) => index.toString()}
+              ItemSeparatorComponent={Separator}
+              renderItem={({item, index}) => (
+                <HomeDeviceInfo
+                  deviceName={item.deviceName}
+                  deviceColor={Object.values(deviceColors)[index]}
+                />
+              )}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </LocationContextProvider>
   );
 };
 
@@ -72,7 +76,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
-
 
   homeHeadingWrapper: {
     flex: 0.1,
