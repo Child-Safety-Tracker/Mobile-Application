@@ -5,7 +5,7 @@ import Mapbox, {Camera, PointAnnotation} from '@rnmapbox/maps';
 import {LocationContext} from '../../../context/location.context';
 // @ts-ignore
 import MapPinFillIcon from '@assets/icons/screens/home/map-pin-fill.svg';
-import {deviceColors} from '@lib/colors/device';
+import {deviceColorsDark} from '@lib/colors/device';
 
 // @ts-ignore
 import {OPEN_MAP_PUBLIC_KEY} from '@env';
@@ -32,7 +32,7 @@ const HomeMap = () => {
         {location.map((element: any, index: number) => {
           return (
             <PointAnnotation coordinate={[element.payload.longitude, element.payload.latitude]} id={index.toString()} key={element.id} >
-              <MapPinFillIcon width={25} height={25} color={Object.values(deviceColors)[index]} />
+              <MapPinFillIcon width={25} height={25} color={Object.values(deviceColorsDark)[index]} />
            </PointAnnotation>
           );
         })}
