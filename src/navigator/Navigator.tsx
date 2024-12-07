@@ -51,7 +51,7 @@ const Navigator = () => {
               paddingTop: 5,
             },
             // Custom icons for the navigation bar
-            tabBarIcon: ({focused, color, size}) => {
+            tabBarIcon: ({focused, size}) => {
               let returnedIcon;
               switch (route.name) {
                 case 'Home':
