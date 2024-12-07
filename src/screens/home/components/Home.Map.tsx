@@ -5,6 +5,7 @@ import Mapbox, {Camera, PointAnnotation} from '@rnmapbox/maps';
 import {LocationContext} from '../../../context/location.context';
 // @ts-ignore
 import MapPinFillIcon from '@assets/icons/screens/home/map-pin-fill.svg';
+// @ts-ignore
 import {deviceColorsDark} from '@lib/colors/device';
 
 // @ts-ignore

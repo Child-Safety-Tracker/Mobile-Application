@@ -1,3 +1,4 @@
+//@ts-ignore
 import {dark, light} from '@lib/colors/theme';
 
 export const deviceColors = {
