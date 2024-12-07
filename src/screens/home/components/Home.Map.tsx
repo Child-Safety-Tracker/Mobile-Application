@@ -4,6 +4,7 @@ import Mapbox, {Camera, PointAnnotation} from '@rnmapbox/maps';
 
 import {LocationContext} from '../../../context/location.context';
 
+// @ts-ignore
 import MapPinFillIcon from '@assets/icons/screens/home/map-pin-fill.svg';
 
 // @ts-ignore
@@ -12,16 +13,16 @@ import {OPEN_MAP_PUBLIC_KEY} from '@env';
 Mapbox.setAccessToken(OPEN_MAP_PUBLIC_KEY);
 
 const HomeMap = () => {
-  const {location, isLoading}: any = useContext(LocationContext);
+  const {location, isLoadingLocation}: any = useContext(LocationContext);
   let coordinates: any[] | undefined;
 
-  if (!isLoading) {
+  if (!isLoadingLocation) {
     console.log(location);
-    coordinates = [location.payload.longitude, location.payload.latitude];
+    coordinates = [location[0].payload.longitude, location[0].payload.latitude];
   }
 
   // @ts-ignore
-  return isLoading ? null : (
+  return isLoadingLocation ? null : (
     <View style={styles.container}>
       <Mapbox.MapView
         logoEnabled={false}

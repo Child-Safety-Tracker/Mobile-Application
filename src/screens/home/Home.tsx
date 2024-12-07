@@ -12,6 +12,7 @@ import HomeDeviceInfo from './components/Home.DeviceInfo';
 import FlatList = Animated.FlatList;
 
 import LocationContextProvider from '../../context/location.context';
+import {DeviceContext} from '../../context/device.context';
 
 const devices = [
   {
@@ -32,7 +33,8 @@ const Separator = () => <View style={{height: 10}} />;
 
 let deviceNum = 2;
 const HomeScreen = () => {
-  return (
+  const {isLoadingDevice}: any = useContext(DeviceContext);
+  return isLoadingDevice ? null : (
     <LocationContextProvider>
       <View style={styles.container}>
         <View style={styles.homeHeadingWrapper}>

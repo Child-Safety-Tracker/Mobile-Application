@@ -1,35 +1,51 @@
-import React, {useState, createContext, useEffect} from 'react';
+import React, {useState, createContext, useEffect, useContext} from 'react';
 
 import {location_request} from '../APIs/location/location';
+import {DeviceContext} from './device.context';
+
+// @ts-ignore
+import {SERVER_ADDRESS} from '@env';
 
 export const LocationContext = createContext({});
 
-const LocationContextProvider = (props: any) => {
+const LocationContextProvider = ({children}: any) => {
+  const {device, isLoadingDevice}: any = useContext(DeviceContext);
+
   const [location, setLocation] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingLocation, setIsLoadingLocation] = useState(true);
+
+  let deviceIds: string[], privateKeys: string[];
+  // Extract array of Id and Keys
+  if (!isLoadingDevice) {
+    deviceIds = device.map((element: any) => {
+      return element.deviceId;
+    });
+    privateKeys = device.map((element: any) => {
+      return element.privateKey;
+    });
+  }
 
   useEffect(() => {
-    setIsLoading(true);
-    location_request('http://192.168.167.89:1234/location', {
-      privateKey: 'hUotVQIdoniIfacuUNHahmnNK98GRV6+kn+sOQ==',
-      ids: ['afirx1LlNk5vh7BnbGukU+L8o9E3pHhd/uogNOdmdv8='],
+    location_request(SERVER_ADDRESS + '/location', {
+      privateKeys: privateKeys,
+      ids: deviceIds,
     })
       .then(result => {
-        console.log(result);
         setLocation(result);
-        setIsLoading(false);
+        setIsLoadingLocation(false);
         console.log('[Location] Successfully fetched locations');
       })
       .catch(error => {
         console.log('[Location] Failed to fetch locations');
         console.log(error);
       });
-  }, []);
+    // Only call when the device is loaded
+  }, [isLoadingDevice]);
 
   return (
     <LocationContext.Provider
-      value={{location: location, isLoading: isLoading}}>
-      {props.children}
+      value={{location: location, isLoadingLocation: isLoadingLocation}}>
+      {children}
     </LocationContext.Provider>
   );
 };
