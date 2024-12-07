@@ -3,9 +3,9 @@ import {StyleSheet, View} from 'react-native';
 import Mapbox, {Camera, PointAnnotation} from '@rnmapbox/maps';
 
 import {LocationContext} from '../../../context/location.context';
-
 // @ts-ignore
 import MapPinFillIcon from '@assets/icons/screens/home/map-pin-fill.svg';
+import {deviceColors} from '@lib/colors/device';
 
 // @ts-ignore
 import {OPEN_MAP_PUBLIC_KEY} from '@env';
@@ -29,9 +29,13 @@ const HomeMap = () => {
         compassEnabled={false}
         attributionEnabled={false}
         style={styles.map}>
-        <PointAnnotation coordinate={coordinates!} id={''}>
-          <MapPinFillIcon width={25} height={25} color={'white'} />
-        </PointAnnotation>
+        {location.map((element: any, index: number) => {
+          return (
+            <PointAnnotation coordinate={[element.payload.longitude, element.payload.latitude]} id={index.toString()} key={element.id} >
+              <MapPinFillIcon width={25} height={25} color={Object.values(deviceColors)[index]} />
+           </PointAnnotation>
+          );
+        })}
         <Camera centerCoordinate={coordinates} zoomLevel={18} />
       </Mapbox.MapView>
     </View>
