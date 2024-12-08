@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import React, {useContext} from 'react';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 // @ts-ignore
 import {dark} from '@lib/colors/theme';
@@ -10,19 +10,30 @@ import {fontSize} from '@lib/fontSize';
 import MapPinIconLine from '@assets/icons/screens/home/map-pin-line.svg';
 
 // @ts-ignore
-import ArrowRightIconLine from '@assets/icons/screens/home/arrow-right-circle-line.svg';
+import Circle from '@assets/icons/screens/home/circle-line.svg';
+// @ts-ignore
+import SelectedCircle from '@assets/icons/screens/home/circle-dot.svg';
+import {DeviceContext} from '../../../context/device.context';
 
-const HomeDeviceInfo = ({deviceName, deviceColor, location, lastUpdate}: {deviceName: string, deviceColor: string, location:string, lastUpdate: string}) => {
+const HomeDeviceInfo = ({
+  deviceName,
+  deviceColor,
+  location,
+  lastUpdate,
+  selected,
+}: {
+  deviceName: string;
+  deviceColor: string;
+  location: string;
+  lastUpdate: string;
+  selected: boolean;
+}) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <View>
         <View style={styles.locationInfoContainer}>
           <View style={styles.mapPinIconContainer}>
-            <MapPinIconLine
-              width={20}
-              height={20}
-              color={deviceColor}
-            />
+            <MapPinIconLine width={20} height={20} color={deviceColor} />
           </View>
           <View style={styles.locationInfo}>
             <Text style={styles.deviceName}>{deviceName}</Text>
@@ -31,13 +42,22 @@ const HomeDeviceInfo = ({deviceName, deviceColor, location, lastUpdate}: {device
         </View>
         <Text style={styles.lastUpdate}>Last Update: {lastUpdate}</Text>
       </View>
-      <ArrowRightIconLine
-        borderWidth={5}
-        width={30}
-        height={30}
-        color={dark.colors.text.hex}
-      />
-    </View>
+      {selected ? (
+        <SelectedCircle
+          borderWidth={5}
+          width={25}
+          height={25}
+          color={dark.colors.teal.hex}
+        />
+      ) : (
+        <Circle
+          borderWidth={5}
+          width={25}
+          height={25}
+          color={dark.colors.text.hex}
+        />
+      )}
+    </TouchableOpacity>
   );
 };
 
