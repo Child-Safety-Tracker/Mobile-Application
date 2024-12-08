@@ -39,7 +39,7 @@ const HomeMap = () => {
            </PointAnnotation>
           );
         })}
-        <Camera centerCoordinate={coordinates} zoomLevel={18} />
+        <Camera centerCoordinate={coordinates} zoomLevel={17} />
       </Mapbox.MapView>
     </View>
   );
