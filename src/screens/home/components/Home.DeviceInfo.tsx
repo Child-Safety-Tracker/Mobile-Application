@@ -29,7 +29,8 @@ const HomeDeviceInfo = ({
   selected: boolean;
 }) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <View
+      style={styles.container}>
       <View>
         <View style={styles.locationInfoContainer}>
           <View style={styles.mapPinIconContainer}>
@@ -57,7 +58,7 @@ const HomeDeviceInfo = ({
           color={dark.colors.text.hex}
         />
       )}
-    </TouchableOpacity>
+    </View>
   );
 };
 

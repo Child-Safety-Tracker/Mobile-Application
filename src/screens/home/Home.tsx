@@ -35,7 +35,7 @@ const Separator = () => <View style={{height: 12}} />;
 
 let deviceNum = 2;
 const HomeScreen = () => {
-  const {device, isLoadingDevice, selectedDevice}: any =
+  const {device, isLoadingDevice, selectedDevice, setSelectedDevice}: any =
     useContext(DeviceContext);
 
   return isLoadingDevice ? null : (
@@ -59,15 +59,16 @@ const HomeScreen = () => {
               keyExtractor={(item, index) => index.toString()}
               ItemSeparatorComponent={Separator}
               renderItem={({item, index}) => {
-                console.log(item);
                 return (
-                  <HomeDeviceInfo
-                    deviceName={devicesInfo[index].deviceName}
-                    deviceColor={Object.values(deviceColors)[index] as string}
-                    location={'ads'}
-                    lastUpdate={'ads'}
-                    selected={index === selectedDevice}
-                  />
+                  <TouchableOpacity onPress={() => setSelectedDevice(index)}>
+                    <HomeDeviceInfo
+                      deviceName={devicesInfo[index].deviceName}
+                      deviceColor={Object.values(deviceColors)[index] as string}
+                      location={'ads'}
+                      lastUpdate={'ads'}
+                      selected={index === selectedDevice}
+                    />
+                  </TouchableOpacity>
                 );
               }}
             />
