@@ -10,16 +10,18 @@ import {deviceColorsDark} from '@lib/colors/device';
 
 // @ts-ignore
 import {OPEN_MAP_PUBLIC_KEY} from '@env';
+import {DeviceContext} from '../../../context/device.context';
 
 Mapbox.setAccessToken(OPEN_MAP_PUBLIC_KEY);
 
 const HomeMap = () => {
   const {location, isLoadingLocation}: any = useContext(LocationContext);
+  const {selectedDevice}: any = useContext(DeviceContext);
   let coordinates: any[] | undefined;
 
+  // Set the center of Map camera to the selected device
   if (!isLoadingLocation) {
-    console.log(location);
-    coordinates = [location[0].payload.longitude, location[0].payload.latitude];
+    coordinates = [location[selectedDevice].payload.longitude, location[selectedDevice].payload.latitude];
   }
 
   // @ts-ignore

@@ -3,9 +3,6 @@ import React, {useState, createContext, useEffect, useContext} from 'react';
 import {location_request} from '../APIs/location/location';
 import {DeviceContext} from './device.context';
 
-// @ts-ignore
-import {SERVER_ADDRESS} from '@env';
-
 export const LocationContext = createContext({});
 
 const LocationContextProvider = ({children}: any) => {
@@ -26,7 +23,7 @@ const LocationContextProvider = ({children}: any) => {
   }
 
   useEffect(() => {
-    location_request(SERVER_ADDRESS + '/location', {
+    location_request({
       privateKeys: privateKeys,
       ids: deviceIds,
     })

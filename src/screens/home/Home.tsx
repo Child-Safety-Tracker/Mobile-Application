@@ -1,20 +1,22 @@
-import React, {useContext} from 'react';
-import {Text, View, StyleSheet, Animated} from 'react-native';
-
-import {dark} from '@lib/colors/theme.ts';
-import {deviceColors} from '@lib/colors/device';
+import React, { useContext } from 'react';
+import { Text, View, StyleSheet, Animated } from 'react-native';
 
 import HomeHeading from './components/Home.Heading';
 import HomeMap from './components/Home.Map';
 
-import {fontSize} from '@lib/fontSize';
+// @ts-ignore
+import { dark } from '@lib/colors/theme.ts';
+// @ts-ignore
+import { deviceColors } from '@lib/colors/device';
+// @ts-ignore
+import { fontSize } from '@lib/fontSize';
 import HomeDeviceInfo from './components/Home.DeviceInfo';
 import FlatList = Animated.FlatList;
 
 import LocationContextProvider from '../../context/location.context';
-import {DeviceContext} from '../../context/device.context';
+import { DeviceContext } from '../../context/device.context';
 
-const devices = [
+const devicesInfo = [
   {
     id: 1,
     deviceName: 'Device 1',
@@ -29,11 +31,14 @@ const devices = [
   },
 ];
 
-const Separator = () => <View style={{height: 10}} />;
+const Separator = () => <View style={{ height: 10 }} />;
 
 let deviceNum = 2;
 const HomeScreen = () => {
-  const {isLoadingDevice}: any = useContext(DeviceContext);
+
+  const { device }: any = useContext(DeviceContext);
+
+  const { isLoadingDevice }: any = useContext(DeviceContext);
   return isLoadingDevice ? null : (
     <LocationContextProvider>
       <View style={styles.container}>
@@ -49,17 +54,21 @@ const HomeScreen = () => {
           </Text>
           <View style={styles.deviceInfoList}>
             <FlatList
-              data={devices}
+              data={device}
               showsVerticalScrollIndicator={false}
               initialScrollIndex={0}
               keyExtractor={(item, index) => index.toString()}
               ItemSeparatorComponent={Separator}
-              renderItem={({item, index}) => (
-                <HomeDeviceInfo
-                  deviceName={item.deviceName}
-                  deviceColor={Object.values(deviceColors)[index]}
+              renderItem={({ item, index }) => {
+                console.log(item)
+                return <HomeDeviceInfo
+                  deviceName={devicesInfo[index].deviceName}
+                  deviceColor={Object.values(deviceColors)[index] as string}
+                  location={"ads"}
+                  lastUpdate={"ads"}
                 />
-              )}
+              }
+              }
             />
           </View>
         </View>

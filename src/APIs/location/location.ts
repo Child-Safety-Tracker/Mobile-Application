@@ -1,5 +1,8 @@
-export const location_request = async (URL: string, requestBody: any) => {
-  return await fetch(URL, {
+// @ts-ignore
+import {PRIVATE_SERVER_ADDRESS} from '@env';
+
+export const location_request = async (requestBody: any) => {
+  return await fetch(PRIVATE_SERVER_ADDRESS + '/location', {
     method: 'POST',
     headers: {
       Accept: 'application/json',

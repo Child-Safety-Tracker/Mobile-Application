@@ -1,7 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
+// @ts-ignore
 import {dark} from '@lib/colors/theme';
+// @ts-ignore
 import {fontSize} from '@lib/fontSize';
 
 // @ts-ignore
@@ -10,7 +12,7 @@ import MapPinIconLine from '@assets/icons/screens/home/map-pin-line.svg';
 // @ts-ignore
 import ArrowRightIconLine from '@assets/icons/screens/home/arrow-right-circle-line.svg';
 
-const HomeDeviceInfo = ({deviceName, deviceColor}: {deviceName: string, deviceColor: string}) => {
+const HomeDeviceInfo = ({deviceName, deviceColor, location, lastUpdate}: {deviceName: string, deviceColor: string, location:string, lastUpdate: string}) => {
   return (
     <View style={styles.container}>
       <View>
@@ -24,10 +26,10 @@ const HomeDeviceInfo = ({deviceName, deviceColor}: {deviceName: string, deviceCo
           </View>
           <View style={styles.locationInfo}>
             <Text style={styles.deviceName}>{deviceName}</Text>
-            <Text style={styles.deviceLocation}>Location</Text>
+            <Text style={styles.deviceLocation}>{location}</Text>
           </View>
         </View>
-        <Text style={styles.lastUpdate}>Last Update: 5 min ago</Text>
+        <Text style={styles.lastUpdate}>Last Update: {lastUpdate}</Text>
       </View>
       <ArrowRightIconLine
         borderWidth={5}

@@ -4,7 +4,10 @@ import {device_request} from '../APIs/device';
 export const DeviceContext = createContext({});
 
 const DeviceContextProvider = ({children}: any) => {
+  console.log('Device Context Provider get rendered');
   const [device, setDevice] = useState({});
+  // Select device by index
+  const [selectedDevice, setSelectedDevice] = useState(0);
   const [isLoadingDevice, setIsLoadingDevice] = useState(true);
 
   useEffect(() => {
@@ -22,7 +25,12 @@ const DeviceContextProvider = ({children}: any) => {
 
   return (
     <DeviceContext.Provider
-      value={{device: device, isLoadingDevice: isLoadingDevice}}>
+      value={{
+        device: device,
+        selectedDevice: selectedDevice,
+        setSelectedDevice: setSelectedDevice,
+        isLoadingDevice: isLoadingDevice,
+      }}>
       {children}
     </DeviceContext.Provider>
   );
