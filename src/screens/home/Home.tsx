@@ -13,7 +13,7 @@ import {fontSize} from '@lib/fontSize';
 import HomeDeviceInfo from './components/Home.DeviceInfo';
 import FlatList = Animated.FlatList;
 
-import LocationContextProvider from '../../context/location.context';
+import LocationContextProvider, {LocationContext} from '../../context/location.context';
 import {DeviceContext} from '../../context/device.context';
 
 const devicesInfo = [
@@ -64,9 +64,8 @@ const HomeScreen = () => {
                     <HomeDeviceInfo
                       deviceName={devicesInfo[index].deviceName}
                       deviceColor={Object.values(deviceColors)[index] as string}
-                      location={'ads'}
-                      lastUpdate={'ads'}
                       selected={index === selectedDevice}
+                      selectedIndex={index}
                     />
                   </TouchableOpacity>
                 );

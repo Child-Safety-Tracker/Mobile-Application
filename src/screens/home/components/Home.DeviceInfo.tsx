@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
+import moment from 'moment';
 
 // @ts-ignore
 import {dark} from '@lib/colors/theme';
@@ -14,23 +15,26 @@ import Circle from '@assets/icons/screens/home/circle-line.svg';
 // @ts-ignore
 import SelectedCircle from '@assets/icons/screens/home/circle-dot.svg';
 import {DeviceContext} from '../../../context/device.context';
+import {LocationContext} from '../../../context/location.context';
 
 const HomeDeviceInfo = ({
   deviceName,
   deviceColor,
-  location,
-  lastUpdate,
   selected,
+  selectedIndex,
 }: {
   deviceName: string;
   deviceColor: string;
-  location: string;
-  lastUpdate: string;
   selected: boolean;
+  selectedIndex: number;
 }) => {
+  const {location, isLoadingLocation}: any = useContext(LocationContext);
+  if (!isLoadingLocation) {
+    console.log(location[selectedIndex].payload);
+  }
+
   return (
-    <View
-      style={styles.container}>
+    <View style={styles.container}>
       <View>
         <View style={styles.locationInfoContainer}>
           <View style={styles.mapPinIconContainer}>
@@ -38,10 +42,20 @@ const HomeDeviceInfo = ({
           </View>
           <View style={styles.locationInfo}>
             <Text style={styles.deviceName}>{deviceName}</Text>
-            <Text style={styles.deviceLocation}>{location}</Text>
+            <Text style={styles.deviceLocation}>
+              {isLoadingLocation
+                ? null
+                : location[selectedIndex].payload.longitude.toString() +
+                  ', ' +
+                  location[selectedIndex].payload.latitude.toString()}
+            </Text>
           </View>
         </View>
-        <Text style={styles.lastUpdate}>Last Update: {lastUpdate}</Text>
+        <Text style={styles.lastUpdate}>
+          {isLoadingLocation
+            ? null
+            : moment.unix(location[selectedIndex].payload.timestamp).fromNow()}
+        </Text>
       </View>
       {selected ? (
         <SelectedCircle
