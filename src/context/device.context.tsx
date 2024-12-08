@@ -1,4 +1,5 @@
 import React, {useState, createContext, useEffect} from 'react';
+import {FlatList} from 'react-native';
 import {device_request} from '../APIs/device';
 
 export const DeviceContext = createContext({});
@@ -31,7 +32,7 @@ const DeviceContextProvider = ({children}: any) => {
         setSelectedDevice: setSelectedDevice,
         isLoadingDevice: isLoadingDevice,
       }}>
-      {children}
+        {children}
     </DeviceContext.Provider>
   );
 };

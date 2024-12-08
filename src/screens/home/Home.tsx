@@ -13,25 +13,9 @@ import {fontSize} from '@lib/fontSize';
 import HomeDeviceInfo from './components/Home.DeviceInfo';
 import FlatList = Animated.FlatList;
 
-import LocationContextProvider, {LocationContext} from '../../context/location.context';
+import LocationContextProvider from '../../context/location.context';
 import {DeviceContext} from '../../context/device.context';
-
-const devicesInfo = [
-  {
-    id: 1,
-    deviceName: 'Device 1',
-  },
-  {
-    id: 2,
-    deviceName: 'Device 2',
-  },
-  {
-    id: 3,
-    deviceName: 'Device 3',
-  },
-];
-
-const Separator = () => <View style={{height: 12}} />;
+import HomeDeviceInfoList from './components/Home.DeviceInfoList';
 
 let deviceNum = 2;
 const HomeScreen = () => {
@@ -52,25 +36,7 @@ const HomeScreen = () => {
             Devices - <Text>{deviceNum}</Text>
           </Text>
           <View style={styles.deviceInfoList}>
-            <FlatList
-              data={device}
-              showsVerticalScrollIndicator={false}
-              initialScrollIndex={0}
-              keyExtractor={(item, index) => index.toString()}
-              ItemSeparatorComponent={Separator}
-              renderItem={({item, index}) => {
-                return (
-                  <TouchableOpacity onPress={() => setSelectedDevice(index)}>
-                    <HomeDeviceInfo
-                      deviceName={devicesInfo[index].deviceName}
-                      deviceColor={Object.values(deviceColors)[index] as string}
-                      selected={index === selectedDevice}
-                      selectedIndex={index}
-                    />
-                  </TouchableOpacity>
-                );
-              }}
-            />
+            <HomeDeviceInfoList />
           </View>
         </View>
       </View>
@@ -111,6 +77,5 @@ const styles = StyleSheet.create({
 
   deviceInfoList: {
     flex: 0.8,
-    justifyContent: 'space-between',
   },
 });

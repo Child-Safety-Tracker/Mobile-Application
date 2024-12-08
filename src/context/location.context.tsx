@@ -22,7 +22,8 @@ const LocationContextProvider = ({children}: any) => {
     });
   }
 
-  useEffect(() => {
+  const sendLocationRequest = () => {
+    setIsLoadingLocation(true);
     location_request({
       privateKeys: privateKeys,
       ids: deviceIds,
@@ -36,12 +37,16 @@ const LocationContextProvider = ({children}: any) => {
         console.log('[Location] Failed to fetch locations');
         console.log(error);
       });
+  };
+
+  useEffect(() => {
     // Only call when the device is loaded
+    sendLocationRequest();
   }, [isLoadingDevice]);
 
   return (
     <LocationContext.Provider
-      value={{location: location, isLoadingLocation: isLoadingLocation}}>
+      value={{location: location, isLoadingLocation: isLoadingLocation, sendLocationRequest: sendLocationRequest}}>
       {children}
     </LocationContext.Provider>
   );
