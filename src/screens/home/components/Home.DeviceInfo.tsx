@@ -14,7 +14,6 @@ import MapPinIconLine from '@assets/icons/screens/home/map-pin-line.svg';
 import Circle from '@assets/icons/screens/home/circle-line.svg';
 // @ts-ignore
 import SelectedCircle from '@assets/icons/screens/home/circle-dot.svg';
-import {DeviceContext} from '../../../context/device.context';
 import {LocationContext} from '../../../context/location.context';
 
 const HomeDeviceInfo = ({
