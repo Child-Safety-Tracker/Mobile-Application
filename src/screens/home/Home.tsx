@@ -19,7 +19,7 @@ import HomeDeviceInfoList from './components/Home.DeviceInfoList';
 
 let deviceNum = 2;
 const HomeScreen = () => {
-  const {device, isLoadingDevice, selectedDevice, setSelectedDevice}: any =
+  const {isLoadingDevice}: any =
     useContext(DeviceContext);
 
   return isLoadingDevice ? null : (

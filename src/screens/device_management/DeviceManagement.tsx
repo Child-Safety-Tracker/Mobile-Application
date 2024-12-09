@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 
 import Device from './components/Device';
@@ -6,8 +6,10 @@ import DeviceManagementHeading from './components/DeviceManagement.Heading';
 
 import {dark} from '@lib/colors/theme';
 import {deviceColors} from '@lib/colors/device';
+import {DeviceContext} from '../../context/device.context';
+import LocationContextProvider from '../../context/location.context';
 
-const devices = [
+const deviceInfo = [
   {
     id: 1,
     deviceName: 'Device 1',
@@ -22,51 +24,55 @@ const devices = [
   },
 ];
 
-const Separator = () => <View style={{height: 10}} />;
+const Separator = () => <View style={{height: 15}} />;
 
 const DeviceManagementScreen = () => {
+  const {device}: any = useContext(DeviceContext);
   return (
-    <View style={styles.container}>
-      <View style={styles.deviceManagementHeadingWrapper}>
-        <DeviceManagementHeading />
-      </View>
-      <View
-        style={{
-          flex: 0.9,
-        }}>
-        <FlatList
-          data={devices}
-          showsVerticalScrollIndicator={false}
-          initialScrollIndex={0}
-          keyExtractor={(item, index) => index.toString()}
-          ItemSeparatorComponent={Separator}
-          renderItem={({item, index}) => (
-            <Device
-              deviceName={item.deviceName}
-              deviceColor={Object.values(deviceColors)[index]}
-            />
-          )}
-        />
-      </View>
-      <TouchableOpacity
-        style={{
-          bottom: 20,
-          height: 50,
-          alignItems: 'center',
-          justifyContent: 'center',
-          alignSelf: 'center',
-          aspectRatio: 1,
-          borderRadius: '100%',
-          backgroundColor: dark.colors.teal.hex,
-        }}>
-        <Text
+    <LocationContextProvider>
+      <View style={styles.container}>
+        <View style={styles.deviceManagementHeadingWrapper}>
+          <DeviceManagementHeading />
+        </View>
+        <View
           style={{
-            color: dark.colors.crust.hex,
+            flex: 0.9,
           }}>
-          +
-        </Text>
-      </TouchableOpacity>
-    </View>
+          <FlatList
+            data={device}
+            showsVerticalScrollIndicator={false}
+            initialScrollIndex={0}
+            keyExtractor={(item, index) => index.toString()}
+            ItemSeparatorComponent={Separator}
+            renderItem={({item, index}) => (
+              <Device
+                deviceName={deviceInfo[index].deviceName}
+                deviceColor={Object.values(deviceColors)[index]}
+                index={index}
+              />
+            )}
+          />
+        </View>
+        <TouchableOpacity
+          style={{
+            bottom: 20,
+            height: 50,
+            alignItems: 'center',
+            justifyContent: 'center',
+            alignSelf: 'center',
+            aspectRatio: 1,
+            borderRadius: '100%',
+            backgroundColor: dark.colors.teal.hex,
+          }}>
+          <Text
+            style={{
+              color: dark.colors.crust.hex,
+            }}>
+            +
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </LocationContextProvider>
   );
 };
 

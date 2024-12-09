@@ -1,36 +1,46 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {StyleSheet, View, Text, Switch} from 'react-native';
+import moment from 'moment';
 
 import {dark} from '@lib/colors/theme';
 import {fontSize} from '@lib/fontSize';
 
 // @ts-ignore
 import MapPinIconLine from '@assets/icons/screens/home/map-pin-line.svg';
-
-// @ts-ignore
-import ArrowRightIconLine from '@assets/icons/screens/home/arrow-right-circle-line.svg';
+import {LocationContext} from '../../../context/location.context';
 
 const HomeDeviceInfo = ({
   deviceName,
   deviceColor,
+  index,
 }: {
   deviceName: string;
   deviceColor: string;
+  index: number;
 }) => {
-  const [isEnabled, setIsEnabled] = React.useState(false);
+  const {location, isLoadingLocation}: any = useContext(LocationContext);
+
+  if (!isLoadingLocation) console.log(location);
+
+  const [isEnabled, setIsEnabled] = useState(false);
+
   return (
     <View style={styles.container}>
       <View>
-        <View style={styles.locationInfoContainer}>
+        <View style={styles.deviceInfoContainer}>
           <View style={styles.mapPinIconContainer}>
             <MapPinIconLine width={20} height={20} color={deviceColor} />
           </View>
-          <View style={styles.locationInfo}>
+          <View style={styles.deviceInfo}>
             <Text style={styles.deviceName}>{deviceName}</Text>
-            <Text style={styles.deviceLocation}>Added on: </Text>
+            <Text style={styles.dateAdded}>Added: 2 months ago</Text>
           </View>
         </View>
-        <Text style={styles.lastUpdate}>Last Update: 5 min ago</Text>
+        <Text style={styles.lastUpdate}>
+          {isLoadingLocation
+            ? null
+            : moment.unix(location[index].payload.timestamp).fromNow()}
+        </Text>
       </View>
       <Switch
         value={isEnabled}
@@ -58,7 +68,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
 
-  locationInfoContainer: {
+  deviceInfoContainer: {
     flexDirection: 'row',
   },
 
@@ -68,7 +78,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 
-  locationInfo: {
+  deviceInfo: {
     marginLeft: 10,
     fontSize: fontSize.text.medium,
   },
@@ -77,7 +87,8 @@ const styles = StyleSheet.create({
     color: dark.colors.text.hex,
   },
 
-  deviceLocation: {
+  dateAdded: {
+    marginTop: 2,
     color: dark.colors.text.hex,
     opacity: 0.5,
   },

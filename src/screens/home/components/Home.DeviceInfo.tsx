@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   },
 
   deviceLocation: {
+    marginTop: 2,
     color: dark.colors.text.hex,
     opacity: 0.5,
   },
