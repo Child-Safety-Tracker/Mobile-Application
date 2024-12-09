@@ -55,7 +55,7 @@ const AlertScreen = () => {
         <AlertDeviceSelection updateIndex={setSelectedIndex} />
       </View>
       <View style={styles.alertMapWrapper}>
-        <AlertMap index={selectedIndex} />
+        <AlertMap selectedIndex={selectedIndex} />
       </View>
     </View>
   );

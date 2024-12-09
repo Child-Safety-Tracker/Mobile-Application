@@ -1,10 +1,46 @@
 import React, {useContext} from 'react';
-import {View, StyleSheet} from 'react-native';
-import Mapbox, {Camera} from '@rnmapbox/maps';
+import {View, StyleSheet, Text} from 'react-native';
+import Mapbox, {Camera, PointAnnotation} from '@rnmapbox/maps';
 import {LocationContext} from '../../../context/location.context';
 
-const AlertMap = ({index}: {index: number}) => {
+// @ts-ignore
+import MapPinFillIcon from '@assets/icons/screens/home/map-pin-fill.svg';
+import {deviceColors} from '../../../../lib/colors/device';
+
+const AlertMap = ({selectedIndex}: {index: number}) => {
   const {location}: any = useContext(LocationContext);
+
+  let pointAnnotationComponents: any[] = [];
+
+  location.forEach((element: any, index: number) => {
+    pointAnnotationComponents.push(
+      <PointAnnotation
+        coordinate={[element.payload.longitude, element.payload.latitude]}
+        id={index.toString()}
+        key={element.id}>
+        <View
+          style={{
+            height: 150,
+            width: 150,
+            borderWidth: 1,
+            borderColor: 'black',
+          }}></View>
+      </PointAnnotation>,
+    );
+
+    pointAnnotationComponents.push(
+      <PointAnnotation
+        coordinate={[element.payload.longitude, element.payload.latitude]}
+        id={index.toString()}
+        key={element.id}>
+        <MapPinFillIcon
+          width={25}
+          height={25}
+          color={Object.values(deviceColors)[index]}
+        />
+      </PointAnnotation>,
+    );
+  });
 
   return (
     <View style={styles.container}>
@@ -13,10 +49,11 @@ const AlertMap = ({index}: {index: number}) => {
         compassEnabled={false}
         attributionEnabled={false}
         style={styles.map}>
+        {pointAnnotationComponents}
         <Camera
           centerCoordinate={[
-            location[index].payload.longitude,
-            location[index].payload.latitude,
+            location[selectedIndex].payload.longitude,
+            location[selectedIndex].payload.latitude,
           ]}
           zoomLevel={17}
         />
