@@ -11,7 +11,8 @@ export const DeviceContext = createContext({});
 
 const DeviceContextProvider = ({children}: any) => {
   console.log('Device Context Provider get rendered');
-  const [device, setDevice] = useState({});
+
+  const [device, setDevice] = useState([]);
   // Select device by index
   const [selectedDevice, setSelectedDevice] = useState(0);
   const [isLoadingDevice, setIsLoadingDevice] = useState(true);

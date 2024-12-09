@@ -34,6 +34,11 @@ const HomeDeviceInfoList = () => {
     useContext(DeviceContext);
   const {sendLocationRequest}: any = useContext(LocationContext);
 
+  console.log(device);
+  const enabledDevice = device.filter((element: any) => {
+    return element.enabled === true;
+  });
+
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = useCallback(() => {
@@ -50,7 +55,7 @@ const HomeDeviceInfoList = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-        data={device}
+        data={enabledDevice!}
         showsVerticalScrollIndicator={false}
         initialScrollIndex={0}
         keyExtractor={(item, index) => index.toString()}

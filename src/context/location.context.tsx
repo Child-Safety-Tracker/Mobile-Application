@@ -15,8 +15,8 @@ const LocationContextProvider = ({children}: any) => {
   // Extract array of Id and Keys
   if (!isLoadingDevice) {
     deviceIds = device.map((element: any) => {
-      return element.deviceId;
-    });
+        return element.deviceId;
+      });
     privateKeys = device.map((element: any) => {
       return element.privateKey;
     });
@@ -46,7 +46,12 @@ const LocationContextProvider = ({children}: any) => {
 
   return (
     <LocationContext.Provider
-      value={{location: location, isLoadingLocation: isLoadingLocation, setIsLoadingLocation: setIsLoadingLocation, sendLocationRequest: sendLocationRequest}}>
+      value={{
+        location: location,
+        isLoadingLocation: isLoadingLocation,
+        setIsLoadingLocation: setIsLoadingLocation,
+        sendLocationRequest: sendLocationRequest,
+      }}>
       {children}
     </LocationContext.Provider>
   );
