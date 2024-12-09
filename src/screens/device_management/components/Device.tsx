@@ -8,6 +8,7 @@ import {fontSize} from '@lib/fontSize';
 // @ts-ignore
 import MapPinIconLine from '@assets/icons/screens/home/map-pin-line.svg';
 import {LocationContext} from '../../../context/location.context';
+import {DeviceContext} from '../../../context/device.context';
 
 const HomeDeviceInfo = ({
   deviceName,
@@ -18,11 +19,12 @@ const HomeDeviceInfo = ({
   deviceColor: string;
   index: number;
 }) => {
+  const {device}: any = useContext(DeviceContext);
   const {location, isLoadingLocation}: any = useContext(LocationContext);
 
   if (!isLoadingLocation) console.log(location);
 
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(device[index].enabled);
 
   return (
     <View style={styles.container}>

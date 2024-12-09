@@ -8,6 +8,7 @@ const DeviceContextProvider = ({children}: any) => {
   const [device, setDevice] = useState({});
   // Select device by index
   const [selectedDevice, setSelectedDevice] = useState(0);
+  const [requestDevice, setRequestDevice] = useState();
   const [isLoadingDevice, setIsLoadingDevice] = useState(true);
 
   useEffect(() => {
