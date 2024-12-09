@@ -17,12 +17,13 @@ const AlertMap = ({selectedIndex}: {index: number}) => {
       <PointAnnotation
         coordinate={[element.payload.longitude, element.payload.latitude]}
         id={index.toString()}
-        key={element.id}>
+        key={element.id + 'Pin'}>
         <View
           style={{
             height: 150,
             width: 150,
             borderWidth: 1,
+            borderRadius: '100%',
             borderColor: 'black',
           }}></View>
       </PointAnnotation>,
@@ -32,7 +33,7 @@ const AlertMap = ({selectedIndex}: {index: number}) => {
       <PointAnnotation
         coordinate={[element.payload.longitude, element.payload.latitude]}
         id={index.toString()}
-        key={element.id}>
+        key={element.id + 'Zone'}>
         <MapPinFillIcon
           width={25}
           height={25}
