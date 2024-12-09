@@ -7,11 +7,8 @@ import HomeMap from './components/Home.Map';
 // @ts-ignore
 import {dark} from '@lib/colors/theme.ts';
 // @ts-ignore
-import {deviceColors} from '@lib/colors/device';
 // @ts-ignore
 import {fontSize} from '@lib/fontSize';
-import HomeDeviceInfo from './components/Home.DeviceInfo';
-import FlatList = Animated.FlatList;
 
 import LocationContextProvider from '../../context/location.context';
 import {DeviceContext} from '../../context/device.context';
@@ -23,7 +20,6 @@ const HomeScreen = () => {
     useContext(DeviceContext);
 
   return isLoadingDevice ? null : (
-    <LocationContextProvider>
       <View style={styles.container}>
         <View style={styles.homeHeadingWrapper}>
           <HomeHeading />
@@ -40,7 +36,6 @@ const HomeScreen = () => {
           </View>
         </View>
       </View>
-    </LocationContextProvider>
   );
 };
 

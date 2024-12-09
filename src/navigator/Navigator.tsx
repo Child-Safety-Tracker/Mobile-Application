@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import HomeScreen from '@screens/home/Home';
 import AlertScreen from '@screens/alert/Alert';
@@ -30,14 +30,16 @@ import SettingIconFill from '@assets/icons/navigator/settings-fill.svg';
 import SettingIconLine from '@assets/icons/navigator/settings-line.svg';
 
 import {dark} from '@lib/colors/theme';
-import DeviceContextProvider from '../context/device.context';
+import LocationContextProvider from '../context/location.context';
+import {DeviceContext} from '../context/device.context';
 
 // Create a bottom tab navigator
 const Tab = createBottomTabNavigator();
 
 const Navigator = () => {
-  return (
-    <DeviceContextProvider>
+  const {isLoadingDevice}: any = useContext(DeviceContext);
+  return isLoadingDevice ? null : (
+    <LocationContextProvider>
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({route}) => ({
@@ -143,7 +145,7 @@ const Navigator = () => {
           <Tab.Screen name="Setting" component={SettingScreen} />
         </Tab.Navigator>
       </NavigationContainer>
-    </DeviceContextProvider>
+    </LocationContextProvider>
   );
 };
 
