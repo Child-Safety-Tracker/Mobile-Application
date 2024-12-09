@@ -17,7 +17,6 @@ const DeviceContextProvider = ({children}: any) => {
   const [isLoadingDevice, setIsLoadingDevice] = useState(true);
 
   const updateDevice = useCallback((deviceId: any, status: boolean) => {
-    // Update status to trigger use effect
     updateDeviceStatus({
       deviceId: deviceId,
       enabled: status,
@@ -29,9 +28,12 @@ const DeviceContextProvider = ({children}: any) => {
         console.log('[Device] Failed to update device status');
         console.log(error);
       });
+    // Fetch device again
+    sendDeviceRequest();
   }, []);
 
-  useEffect(() => {
+  const sendDeviceRequest = () => {
+    setIsLoadingDevice(true);
     device_request('abcd')
       .then(result => {
         setDevice(result);
@@ -42,7 +44,11 @@ const DeviceContextProvider = ({children}: any) => {
         console.log('[Device] Failed to fetch device info');
         console.log(error);
       });
-  }, [updateDevice]);
+  };
+
+  useEffect(() => {
+    sendDeviceRequest();
+  }, []);
 
   return (
     <DeviceContext.Provider

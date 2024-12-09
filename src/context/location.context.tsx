@@ -42,11 +42,11 @@ const LocationContextProvider = ({children}: any) => {
   useEffect(() => {
     // Only call when the device is loaded
     sendLocationRequest();
-  }, [isLoadingDevice]);
+  }, [device]);
 
   return (
     <LocationContext.Provider
-      value={{location: location, isLoadingLocation: isLoadingLocation, sendLocationRequest: sendLocationRequest}}>
+      value={{location: location, isLoadingLocation: isLoadingLocation, setIsLoadingLocation: setIsLoadingLocation, sendLocationRequest: sendLocationRequest}}>
       {children}
     </LocationContext.Provider>
   );
