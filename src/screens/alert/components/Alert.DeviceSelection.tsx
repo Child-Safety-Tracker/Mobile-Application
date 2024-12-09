@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 
@@ -10,24 +10,33 @@ import ArrowUpIconFill from '@assets/icons/screens/alert/arrow-up-fill.svg';
 import ArrowDownIconFill from '@assets/icons/screens/alert/arrow-down-fill.svg';
 // @ts-ignore
 import MapIconLine from '@assets/icons/screens/alert/map-pin-line.svg';
+import {DeviceContext} from '../../../context/device.context';
+import {deviceColors} from '../../../../lib/colors/device';
 
-const devices = [
+let devices = [
   {
     label: 'Device 1',
-    value: 'Device 1',
+    value: 0,
   },
   {
     label: 'Device 2',
-    value: 'Device 2',
+    value: 1,
   },
   {
     label: 'Device 3',
-    value: 'Device 3',
+    value: 2,
   },
 ];
 
 const AlertDeviceSelection = () => {
-  const [value, setValue] = React.useState('');
+  const {device}: any = useContext(DeviceContext);
+
+  // Trim the menu elements
+  const trimmedDevice = devices.slice(0, device.length);
+  console.log(trimmedDevice);
+
+  const [value, setValue] = React.useState(trimmedDevice[0]);
+
   const [isFocused, setIsFocused] = React.useState(false);
 
   return (
@@ -39,12 +48,16 @@ const AlertDeviceSelection = () => {
       activeColor={dark.colors.base.hex}
       selectedTextStyle={styles.text}
       placeholderStyle={styles.text}
-      data={devices}
-      value={devices[0]}
+      data={trimmedDevice!}
+      value={value}
       labelField={'label'}
       valueField={'value'}
       renderLeftIcon={() => (
-        <MapIconLine width={20} height={20} fill={dark.colors.green.hex} />
+        <MapIconLine
+          width={20}
+          height={20}
+          fill={Object.values(deviceColors)[value.value]}
+        />
       )}
       renderRightIcon={() =>
         isFocused ? (
@@ -58,7 +71,7 @@ const AlertDeviceSelection = () => {
         )
       }
       onChange={item => {
-        setValue(item.value);
+        setValue(item);
         setIsFocused(false);
       }}
       onFocus={() => setIsFocused(true)}
