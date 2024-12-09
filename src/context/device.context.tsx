@@ -1,5 +1,11 @@
-import React, {useState, createContext, useEffect} from 'react';
-import {device_request} from '../APIs/device';
+import React, {
+  useState,
+  createContext,
+  useEffect,
+  useCallback,
+  useRef,
+} from 'react';
+import {device_request, updateDeviceStatus} from '../APIs/device';
 
 export const DeviceContext = createContext({});
 
@@ -8,8 +14,22 @@ const DeviceContextProvider = ({children}: any) => {
   const [device, setDevice] = useState({});
   // Select device by index
   const [selectedDevice, setSelectedDevice] = useState(0);
-  const [requestDevice, setRequestDevice] = useState();
   const [isLoadingDevice, setIsLoadingDevice] = useState(true);
+
+  const updateDevice = useCallback((deviceId: any, status: boolean) => {
+    // Update status to trigger use effect
+    updateDeviceStatus({
+      deviceId: deviceId,
+      enabled: status,
+    })
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.log('[Device] Failed to update device status');
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     device_request('abcd')
@@ -22,7 +42,7 @@ const DeviceContextProvider = ({children}: any) => {
         console.log('[Device] Failed to fetch device info');
         console.log(error);
       });
-  }, []);
+  }, [updateDevice]);
 
   return (
     <DeviceContext.Provider
@@ -31,8 +51,9 @@ const DeviceContextProvider = ({children}: any) => {
         selectedDevice: selectedDevice,
         setSelectedDevice: setSelectedDevice,
         isLoadingDevice: isLoadingDevice,
+        updateDevice: updateDevice,
       }}>
-        {children}
+      {children}
     </DeviceContext.Provider>
   );
 };

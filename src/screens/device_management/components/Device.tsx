@@ -9,6 +9,7 @@ import {fontSize} from '@lib/fontSize';
 import MapPinIconLine from '@assets/icons/screens/home/map-pin-line.svg';
 import {LocationContext} from '../../../context/location.context';
 import {DeviceContext} from '../../../context/device.context';
+import {updateDeviceStatus} from '../../../APIs/device';
 
 const HomeDeviceInfo = ({
   deviceName,
@@ -19,7 +20,7 @@ const HomeDeviceInfo = ({
   deviceColor: string;
   index: number;
 }) => {
-  const {device}: any = useContext(DeviceContext);
+  const {device, updateDevice}: any = useContext(DeviceContext);
   const {location, isLoadingLocation}: any = useContext(LocationContext);
 
   if (!isLoadingLocation) console.log(location);
@@ -51,7 +52,10 @@ const HomeDeviceInfo = ({
           true: dark.colors.surface1.hex,
         }}
         thumbColor={isEnabled ? dark.colors.teal.hex : dark.colors.text.hex}
-        onValueChange={() => setIsEnabled(!isEnabled)}
+        onValueChange={() => {
+          setIsEnabled(!isEnabled);
+          updateDevice(device[index].deviceId, !isEnabled);
+        }}
       />
     </View>
   );

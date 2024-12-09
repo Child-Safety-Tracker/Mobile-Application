@@ -6,3 +6,16 @@ export const device_request = async (userId: string) => {
     .then(res => res.json())
     .catch(err => err);
 };
+
+export const updateDeviceStatus = async (requestBody: any) => {
+  return await fetch(PRIVATE_SERVER_ADDRESS + '/device', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestBody),
+  })
+    .then(res => res.json())
+    .catch(err => err);
+};
