@@ -28,7 +28,7 @@ let devices = [
   },
 ];
 
-const AlertDeviceSelection = () => {
+const AlertDeviceSelection = ({updateIndex}: any) => {
   const {device}: any = useContext(DeviceContext);
 
   // Trim the menu elements
@@ -72,6 +72,7 @@ const AlertDeviceSelection = () => {
       }
       onChange={item => {
         setValue(item);
+        updateIndex(item.value);
         setIsFocused(false);
       }}
       onFocus={() => setIsFocused(true)}

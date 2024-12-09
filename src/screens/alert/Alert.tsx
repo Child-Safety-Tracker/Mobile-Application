@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 
@@ -28,6 +28,9 @@ const BoundaryIcon = () => (
 );
 
 const AlertScreen = () => {
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
   return (
     <View style={styles.container}>
       <View style={styles.alertHeadingWrapper}>
@@ -49,10 +52,10 @@ const AlertScreen = () => {
         />
       </View>
       <View style={styles.alertDeviceSelectionWrapper}>
-        <AlertDeviceSelection />
+        <AlertDeviceSelection updateIndex={setSelectedIndex} />
       </View>
       <View style={styles.alertMapWrapper}>
-        <AlertMap />
+        <AlertMap index={selectedIndex} />
       </View>
     </View>
   );

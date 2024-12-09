@@ -1,11 +1,26 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
-import Mapbox from '@rnmapbox/maps';
+import Mapbox, {Camera} from '@rnmapbox/maps';
+import {LocationContext} from '../../../context/location.context';
 
-const AlertMap = () => {
+const AlertMap = ({index}: {index: number}) => {
+  const {location}: any = useContext(LocationContext);
+
   return (
     <View style={styles.container}>
-      <Mapbox.MapView style={styles.map} />
+      <Mapbox.MapView
+        logoEnabled={false}
+        compassEnabled={false}
+        attributionEnabled={false}
+        style={styles.map}>
+        <Camera
+          centerCoordinate={[
+            location[index].payload.longitude,
+            location[index].payload.latitude,
+          ]}
+          zoomLevel={17}
+        />
+      </Mapbox.MapView>
     </View>
   );
 };
