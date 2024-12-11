@@ -10,6 +10,7 @@ import {dark} from '../../../lib/colors/theme';
 import {fontSize} from '../../../lib/fontSize';
 import {Dropdown} from 'react-native-element-dropdown';
 import {AlertContext} from '../../context/Alert.context';
+import {useNavigation} from '@react-navigation/native';
 
 const unitSelection = [
   {
@@ -23,6 +24,8 @@ const unitSelection = [
 ];
 
 const AlerConfigurationBoundary = () => {
+  const navigation = useNavigation();
+
   const {setSafeZoneRadius}: any = useContext(AlertContext);
 
   const [text, setText] = useState('');
@@ -49,7 +52,8 @@ const AlerConfigurationBoundary = () => {
       />
       <TouchableOpacity
         onPress={() => {
-          console.log(Number(value) * Number(text));
+          setSafeZoneRadius(Number(value) * Number(text));
+          navigation.navigate('Alert' as never);
         }}
         style={{
           flex: 0.07,

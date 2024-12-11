@@ -12,7 +12,9 @@ import {dark} from '@lib/colors/theme';
 import FlagFillIcon from '@assets/icons/screens/alert/flag-fill.svg';
 // @ts-ignore
 import BoundaryLineIcon from '@assets/icons/screens/alert/boundary-line.svg';
-import AlertContext from '../../context/Alert.context';
+import {AlertContext} from '../../context/Alert.context';
+import {LocationContext} from '../../context/Location.context';
+import Mapbox from '@rnmapbox/maps';
 
 const ReferenceIcon = () => (
   <FlagFillIcon width={20} height={20} fill={dark.colors.text.hex} />
@@ -23,8 +25,21 @@ const BoundaryIcon = () => (
 );
 
 const AlertScreen = () => {
+  const {pressedCoordinate, safeZoneRadius}: any = useContext(AlertContext);
+  const {location}: any = useContext(LocationContext);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
+
+  if (pressedCoordinate.length !== 0) {
+    const X = location[selectedIndex].payload.longitude - pressedCoordinate[0];
+    const Y = location[selectedIndex].payload.latitude - pressedCoordinate[1];
+
+    const distance = Math.sqrt(X * X + Y * Y);
+
+    if (distance > safeZoneRadius) {
+      console.log('Out of zone');
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -52,9 +67,7 @@ const AlertScreen = () => {
         <AlertDeviceSelection updateIndex={setSelectedIndex} />
       </View>
       <View style={styles.alertMapWrapper}>
-        <AlertMap
-          selectedIndex={selectedIndex}
-        />
+        <AlertMap selectedIndex={selectedIndex} />
       </View>
     </View>
   );
