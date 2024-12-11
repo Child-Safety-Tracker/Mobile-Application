@@ -5,9 +5,10 @@ import {LocationContext} from '../../../context/location.context';
 
 // @ts-ignore
 import MapPinFillIcon from '@assets/icons/screens/home/map-pin-fill.svg';
-import {deviceColors} from '../../../../lib/colors/device';
+import {deviceColors} from '@lib/colors/device';
+import {dark} from '@lib/colors/theme';
 
-const AlertMap = ({selectedIndex}: {index: number}) => {
+const AlertMap = ({selectedIndex}: {selectedIndex: number}) => {
   const {location}: any = useContext(LocationContext);
 
   let pointAnnotationComponents: any[] = [];
@@ -18,14 +19,11 @@ const AlertMap = ({selectedIndex}: {index: number}) => {
         coordinate={[element.payload.longitude, element.payload.latitude]}
         id={index.toString()}
         key={element.id + 'Pin'}>
-        <View
-          style={{
-            height: 150,
-            width: 150,
-            borderWidth: 1,
-            borderRadius: '100%',
-            borderColor: 'black',
-          }}></View>
+        <MapPinFillIcon
+          width={25}
+          height={25}
+          color={Object.values(deviceColors)[index]}
+        />
       </PointAnnotation>,
     );
 
@@ -34,11 +32,7 @@ const AlertMap = ({selectedIndex}: {index: number}) => {
         coordinate={[element.payload.longitude, element.payload.latitude]}
         id={index.toString()}
         key={element.id + 'Zone'}>
-        <MapPinFillIcon
-          width={25}
-          height={25}
-          color={Object.values(deviceColors)[index]}
-        />
+        <View style={styles.safeZone}></View>
       </PointAnnotation>,
     );
   });
@@ -75,5 +69,16 @@ const styles = StyleSheet.create({
     flex: 0.9,
     borderRadius: 20,
     overflow: 'hidden',
+  },
+
+  safeZone: {
+    backgroundColor: 'rgba(148, 226, 213, 0.3)',
+    opacity: 0.2,
+    height: 150,
+    width: 150,
+    borderWidth: 1,
+    borderRadius: '100%',
+    borderColor: 'black',
+    zIndex: -99,
   },
 });
