@@ -15,8 +15,8 @@ const LocationContextProvider = ({children}: any) => {
   // Extract array of Id and Keys
   if (!isLoadingDevice) {
     deviceIds = device.map((element: any) => {
-        return element.deviceId;
-      });
+      return element.deviceId;
+    });
     privateKeys = device.map((element: any) => {
       return element.privateKey;
     });
@@ -29,6 +29,7 @@ const LocationContextProvider = ({children}: any) => {
       ids: deviceIds,
     })
       .then(result => {
+        console.log(result);
         setLocation(result);
         setIsLoadingLocation(false);
         console.log('[Location] Successfully fetched locations');

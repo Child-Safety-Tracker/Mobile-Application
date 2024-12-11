@@ -28,9 +28,6 @@ const HomeDeviceInfo = ({
   selectedIndex: number;
 }) => {
   const {location, isLoadingLocation}: any = useContext(LocationContext);
-  if (!isLoadingLocation) {
-    console.log(location[selectedIndex].payload);
-  }
 
   return (
     <View style={styles.container}>
