@@ -1,11 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {dark} from '@lib/colors/theme';
 import {fontSize} from '@lib/fontSize';
 
-// @ts-ignore
-import FlagFillIcon from '@assets/icons/screens/alert/flag-fill.svg';
 // @ts-ignore
 import ArrowRightIcon from '@assets/icons/screens/alert/arrow-right-line.svg';
 
@@ -21,7 +19,7 @@ const AlertConfiguration = ({
   configValue2: string;
 }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <View style={styles.headingComponentsWrapper}>
         <View style={styles.headingWrapper}>
           {icon}
@@ -33,7 +31,7 @@ const AlertConfiguration = ({
         <Text style={styles.info}>{configValue1}</Text>
         <Text style={styles.info}>{configValue2}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -28,7 +28,6 @@ const BoundaryIcon = () => (
 );
 
 const AlertScreen = () => {
-
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (

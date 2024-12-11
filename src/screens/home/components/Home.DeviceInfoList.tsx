@@ -34,7 +34,6 @@ const HomeDeviceInfoList = () => {
     useContext(DeviceContext);
   const {sendLocationRequest}: any = useContext(LocationContext);
 
-  console.log(device);
   const enabledDevice = device.filter((element: any) => {
     return element.enabled === true;
   });

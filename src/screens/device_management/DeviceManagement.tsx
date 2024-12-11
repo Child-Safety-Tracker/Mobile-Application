@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Text, View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 
-import Device from './components/Device';
+import Device from './components/DeviceManagement.Device';
 import DeviceManagementHeading from './components/DeviceManagement.Heading';
 
 import {dark} from '@lib/colors/theme';
