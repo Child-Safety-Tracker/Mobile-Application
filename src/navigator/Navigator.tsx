@@ -32,6 +32,7 @@ import SettingIconLine from '@assets/icons/navigator/settings-line.svg';
 import {dark} from '@lib/colors/theme';
 import LocationContextProvider from '../context/Location.context';
 import {DeviceContext} from '../context/Device.context';
+import AlertStackNavigator from './Alert.Navigator';
 
 // Create a bottom tab navigator
 const Tab = createBottomTabNavigator();
@@ -136,7 +137,7 @@ const Navigator = () => {
             },
           })}>
           <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Alert" component={AlertScreen} />
+          <Tab.Screen name="Alert" component={AlertStackNavigator} />
           <Tab.Screen name="FindDevice" component={FindDeviceScreen} />
           <Tab.Screen
             name="DeviceManagement"
