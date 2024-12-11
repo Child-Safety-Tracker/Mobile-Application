@@ -11,11 +11,13 @@ import navigator from '../../../navigator/Navigator';
 
 const AlertConfiguration = ({
   icon,
+  selectedDevice,
   configName,
   configValue1,
   configValue2,
 }: {
   icon: any;
+  selectedDevice: number;
   configName: string;
   configValue1: string;
   configValue2: string;
@@ -26,8 +28,8 @@ const AlertConfiguration = ({
       style={styles.container}
       onPress={() => {
         configName === 'Reference'
-          ? navigation.navigate('Alert Reference' as never)
-          : navigation.navigate('Alert Boundary' as never);
+          ? navigation.navigate('Alert Reference' as never, {selectedDevice: selectedDevice} as never)
+          : navigation.navigate('Alert Boundary' as never, {selectedDevice: selectedDevice} as never);
       }}>
       <View style={styles.headingComponentsWrapper}>
         <View style={styles.headingWrapper}>

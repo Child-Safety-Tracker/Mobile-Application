@@ -38,6 +38,7 @@ const AlertScreen = () => {
       <View style={styles.alertConfigurationWrapper}>
         <AlertConfiguration
           icon={<ReferenceIcon />}
+          selectedDevice={selectedIndex}
           configName={'Reference'}
           configValue1={'16°05\'09.8"N'}
           configValue2={'108°09\'04.5"E'}
@@ -45,6 +46,7 @@ const AlertScreen = () => {
         <View style={styles.alertConfigurationSeparator} />
         <AlertConfiguration
           icon={<BoundaryIcon />}
+          selectedDevice={selectedIndex}
           configName={'Boundary'}
           configValue1={'100m'}
           configValue2={''}
