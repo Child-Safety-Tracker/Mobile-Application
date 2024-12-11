@@ -6,7 +6,6 @@ import {LocationContext} from '../../../context/Location.context';
 // @ts-ignore
 import MapPinFillIcon from '@assets/icons/screens/home/map-pin-fill.svg';
 import {deviceColors} from '@lib/colors/device';
-import {dark} from '@lib/colors/theme';
 import {AlertContext} from '../../../context/Alert.context';
 
 const AlertMap = ({selectedIndex}: {selectedIndex: number}) => {
