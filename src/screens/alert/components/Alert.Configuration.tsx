@@ -7,7 +7,6 @@ import {fontSize} from '@lib/fontSize';
 // @ts-ignore
 import ArrowRightIcon from '@assets/icons/screens/alert/arrow-right-line.svg';
 import {useNavigation} from '@react-navigation/native';
-import navigator from '../../../navigator/Navigator';
 
 const AlertConfiguration = ({
   icon,

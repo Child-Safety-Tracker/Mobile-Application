@@ -1,9 +1,19 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {createContext, useState} from 'react';
 
-const AlertContext = createContext(null);
+export const AlertContext = createContext({});
 
 const AlertContextProvider = ({children}: any) => {
-  return <AlertContext.Provider value={{}}>{children}</AlertContext.Provider>;
+  const [pressedCoordinate, setPressedCoordinate] = useState([]);
+
+  return (
+    <AlertContext.Provider
+      value={{
+        pressedCoordinate: pressedCoordinate,
+        setPressedCoordinate: setPressedCoordinate,
+      }}>
+      {children}
+    </AlertContext.Provider>
+  );
 };
 
 export default AlertContextProvider;

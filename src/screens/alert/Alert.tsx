@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import Mapbox from '@rnmapbox/maps';
 
 import AlertHeading from './components/Alert.Heading';
 import AlertConfiguration from './components/Alert.Configuration';
@@ -13,11 +12,7 @@ import {dark} from '@lib/colors/theme';
 import FlagFillIcon from '@assets/icons/screens/alert/flag-fill.svg';
 // @ts-ignore
 import BoundaryLineIcon from '@assets/icons/screens/alert/boundary-line.svg';
-
-// @ts-ignore
-import {OPEN_MAP_PUBLIC_KEY} from '@env';
-
-Mapbox.setAccessToken(OPEN_MAP_PUBLIC_KEY);
+import AlertContext from '../../context/Alert.context';
 
 const ReferenceIcon = () => (
   <FlagFillIcon width={20} height={20} fill={dark.colors.text.hex} />
@@ -28,6 +23,7 @@ const BoundaryIcon = () => (
 );
 
 const AlertScreen = () => {
+
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
@@ -56,7 +52,9 @@ const AlertScreen = () => {
         <AlertDeviceSelection updateIndex={setSelectedIndex} />
       </View>
       <View style={styles.alertMapWrapper}>
-        <AlertMap selectedIndex={selectedIndex} />
+        <AlertMap
+          selectedIndex={selectedIndex}
+        />
       </View>
     </View>
   );

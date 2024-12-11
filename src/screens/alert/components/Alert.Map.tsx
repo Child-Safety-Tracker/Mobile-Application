@@ -7,9 +7,11 @@ import {LocationContext} from '../../../context/Location.context';
 import MapPinFillIcon from '@assets/icons/screens/home/map-pin-fill.svg';
 import {deviceColors} from '@lib/colors/device';
 import {dark} from '@lib/colors/theme';
+import {AlertContext} from '../../../context/Alert.context';
 
 const AlertMap = ({selectedIndex}: {selectedIndex: number}) => {
   const {location}: any = useContext(LocationContext);
+  const {pressedCoordinate}: any = useContext(AlertContext);
 
   let pointAnnotationComponents: any[] = [];
 
@@ -29,7 +31,11 @@ const AlertMap = ({selectedIndex}: {selectedIndex: number}) => {
 
     pointAnnotationComponents.push(
       <PointAnnotation
-        coordinate={[element.payload.longitude, element.payload.latitude]}
+        coordinate={
+          pressedCoordinate.length !== 0
+            ? pressedCoordinate
+            : [element.payload.longitude, element.payload.latitude]
+        }
         id={index.toString()}
         key={element.id + 'Zone'}>
         <View style={styles.safeZone}></View>
@@ -50,6 +56,7 @@ const AlertMap = ({selectedIndex}: {selectedIndex: number}) => {
             location[selectedIndex].payload.longitude,
             location[selectedIndex].payload.latitude,
           ]}
+          animationMode={'none'}
           zoomLevel={17}
         />
       </Mapbox.MapView>
