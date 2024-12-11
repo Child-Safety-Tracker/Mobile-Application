@@ -1,11 +1,12 @@
 import React, {useContext, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Mapbox, {Camera, PointAnnotation} from '@rnmapbox/maps';
 
 // @ts-ignore
 import {OPEN_MAP_PUBLIC_KEY} from '@env';
 import {LocationContext} from '../../context/Location.context';
-import {Position} from '@rnmapbox/maps/lib/typescript/src/types/Position';
+import {fontSize} from '../../../lib/fontSize';
+import {dark} from '../../../lib/colors/theme';
 
 Mapbox.setAccessToken(OPEN_MAP_PUBLIC_KEY);
 
@@ -31,6 +32,34 @@ const AlertConfigurationReference = ({route}: any) => {
   // @ts-ignore
   return (
     <View style={styles.container}>
+      <View
+        style={{
+          bottom: 0,
+          height: '15%',
+          width: '100%',
+          position: 'absolute',
+          zIndex: 999,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: dark.colors.base.hex,
+            width: '70%',
+            height: '40%',
+            borderRadius: 100,
+            justifyContent: 'center',
+          }}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: fontSize.text.mediumLarge,
+              color: dark.colors.text.hex,
+            }}>
+            Confirm
+          </Text>
+        </TouchableOpacity>
+      </View>
       <Mapbox.MapView
         onPress={(event: any) => {
           const {geometry} = event;

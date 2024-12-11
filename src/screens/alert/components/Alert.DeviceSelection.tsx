@@ -33,7 +33,7 @@ const AlertDeviceSelection = ({updateIndex}: any) => {
 
   // Trim the menu elements
   const trimmedDevice = devices.slice(0, device.length);
-  console.log(trimmedDevice);
+
 
   const [value, setValue] = React.useState(trimmedDevice[0]);
 
