@@ -72,7 +72,7 @@ const Navigator = () => {
                     />
                   );
                   break;
-                case 'Alert':
+                case 'Alert Navigator':
                   returnedIcon = focused ? (
                     <AlertIconFill
                       width={size}
@@ -137,7 +137,7 @@ const Navigator = () => {
             },
           })}>
           <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Alert" component={AlertStackNavigator} />
+          <Tab.Screen name="Alert Navigator" component={AlertStackNavigator} />
           <Tab.Screen name="FindDevice" component={FindDeviceScreen} />
           <Tab.Screen
             name="DeviceManagement"

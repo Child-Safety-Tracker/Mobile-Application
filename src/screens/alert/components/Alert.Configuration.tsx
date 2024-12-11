@@ -6,6 +6,8 @@ import {fontSize} from '@lib/fontSize';
 
 // @ts-ignore
 import ArrowRightIcon from '@assets/icons/screens/alert/arrow-right-line.svg';
+import {useNavigation} from '@react-navigation/native';
+import navigator from '../../../navigator/Navigator';
 
 const AlertConfiguration = ({
   icon,
@@ -18,8 +20,15 @@ const AlertConfiguration = ({
   configValue1: string;
   configValue2: string;
 }) => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => {
+        configName === 'Reference'
+          ? navigation.navigate('Alert Reference' as never)
+          : navigation.navigate('Alert Boundary' as never);
+      }}>
       <View style={styles.headingComponentsWrapper}>
         <View style={styles.headingWrapper}>
           {icon}
