@@ -2,13 +2,41 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {dark} from '../../../lib/colors/theme';
 import {fontSize} from '../../../lib/fontSize';
+import {Dropdown} from 'react-native-element-dropdown';
 
-const AlerConfigurationBoundary= () => {
+const unitSelection = [
+  {
+    label: 'Meters',
+    value: 'Meters',
+  },
+  {
+    label: 'Kilometers',
+    value: 'Kilometers',
+  },
+];
+
+const AlerConfigurationBoundary = () => {
+  const [text, setText] = useState('');
   const [value, setValue] = useState('');
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Boundary</Text>
-      <TextInput style={styles.textInput} value={value} onChangeText={setValue} />
+      <TextInput style={styles.textInput} value={text} onChangeText={setText} />
+      <Dropdown
+        style={styles.dropDown}
+        selectedTextStyle={styles.dropDownSelectedText}
+        placeholderStyle={styles.dropDownPlaceholder}
+        itemContainerStyle={styles.dropDownItemContainer}
+        containerStyle={styles.dropDownContainer}
+        itemTextStyle={styles.dropDownItemText}
+        activeColor={dark.colors.base.hex}
+        data={unitSelection}
+        labelField={'label'}
+        valueField={'value'}
+        onChange={(item: any) => {
+          setValue(item);
+        }}
+      />
     </View>
   );
 };
@@ -38,4 +66,32 @@ const styles = StyleSheet.create({
     flex: 0.05,
     backgroundColor: dark.colors.surface0.hex,
   },
+
+  dropDown: {
+    width: '30%',
+    flex: 0.075,
+    justifyContent: 'center',
+  },
+  dropDownSelectedText: {
+    color: dark.colors.text.hex,
+    fontSize: 15,
+  },
+  dropDownPlaceholder: {
+    textAlignVertical: 'center',
+    color: dark.colors.text.hex,
+    fontSize: 15,
+  },
+  dropDownItemContainer: {
+    backgroundColor: dark.colors.surface0.hex,
+    borderRadius: 10,
+  },
+  dropDownContainer: {
+    backgroundColor: dark.colors.surface0.hex,
+    borderRadius: 10,
+    borderWidth: 0,
+  },
+  dropDownItemText: {
+    color: dark.colors.text.hex,
+    fontSize: 15,
+  }
 });
