@@ -1,12 +1,14 @@
-import React from 'react';
-import {Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {dark} from '../../../lib/colors/theme';
+import {fontSize} from '../../../lib/fontSize';
 
 const AlertConfigurationReference = () => {
-  return (
-    <View>
-      <Text>This is Alert Configuration Reference screen</Text>
-    </View>
-  );
+
 };
 
 export default AlertConfigurationReference;
+
+const styles = StyleSheet.create({
+
+});
