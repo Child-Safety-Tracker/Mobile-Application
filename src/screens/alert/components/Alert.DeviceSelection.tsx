@@ -10,7 +10,7 @@ import ArrowUpIconFill from '@assets/icons/screens/alert/arrow-up-fill.svg';
 import ArrowDownIconFill from '@assets/icons/screens/alert/arrow-down-fill.svg';
 // @ts-ignore
 import MapIconLine from '@assets/icons/screens/alert/map-pin-line.svg';
-import {DeviceContext} from '../../../context/device.context';
+import {DeviceContext} from '../../../context/Device.context';
 import {deviceColors} from '../../../../lib/colors/device';
 
 let devices = [

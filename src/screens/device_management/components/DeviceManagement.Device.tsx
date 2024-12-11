@@ -7,8 +7,8 @@ import {fontSize} from '@lib/fontSize';
 
 // @ts-ignore
 import MapPinIconLine from '@assets/icons/screens/home/map-pin-line.svg';
-import {LocationContext} from '../../../context/location.context';
-import {DeviceContext} from '../../../context/device.context';
+import {LocationContext} from '../../../context/Location.context';
+import {DeviceContext} from '../../../context/Device.context';
 
 const HomeDeviceInfo = ({
   deviceName,

@@ -9,8 +9,8 @@ import {
 import HomeDeviceInfo from './Home.DeviceInfo';
 import {deviceColors} from '@lib/colors/device';
 
-import {DeviceContext} from '../../../context/device.context';
-import {LocationContext} from '../../../context/location.context';
+import {DeviceContext} from '../../../context/Device.context';
+import {LocationContext} from '../../../context/Location.context';
 
 const devicesInfo = [
   {

@@ -6,8 +6,8 @@ import DeviceManagementHeading from './components/DeviceManagement.Heading';
 
 import {dark} from '@lib/colors/theme';
 import {deviceColors} from '@lib/colors/device';
-import {DeviceContext} from '../../context/device.context';
-import LocationContextProvider from '../../context/location.context';
+import {DeviceContext} from '../../context/Device.context';
+import LocationContextProvider from '../../context/Location.context';
 
 const deviceInfo = [
   {

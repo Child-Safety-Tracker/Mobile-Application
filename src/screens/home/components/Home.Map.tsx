@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Mapbox, {Camera, PointAnnotation} from '@rnmapbox/maps';
 
-import {LocationContext} from '../../../context/location.context';
+import {LocationContext} from '../../../context/Location.context';
 // @ts-ignore
 import MapPinFillIcon from '@assets/icons/screens/home/map-pin-fill.svg';
 // @ts-ignore
@@ -10,7 +10,7 @@ import {deviceColorsDark} from '@lib/colors/device';
 
 // @ts-ignore
 import {OPEN_MAP_PUBLIC_KEY} from '@env';
-import {DeviceContext} from '../../../context/device.context';
+import {DeviceContext} from '../../../context/Device.context';
 
 Mapbox.setAccessToken(OPEN_MAP_PUBLIC_KEY);
 

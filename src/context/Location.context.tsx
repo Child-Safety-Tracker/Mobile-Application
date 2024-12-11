@@ -1,7 +1,7 @@
 import React, {useState, createContext, useEffect, useContext} from 'react';
 
 import {location_request} from '../APIs/location';
-import {DeviceContext} from './device.context';
+import {DeviceContext} from './Device.context';
 
 export const LocationContext = createContext({});
 

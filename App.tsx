@@ -1,7 +1,7 @@
 import React from 'react';
 import Navigator from './src/navigator/Navigator';
 
-import DeviceContextProvider from './src/context/device.context';
+import DeviceContextProvider from './src/context/Device.context';
 
 const App = (): React.JSX.Element => {
   return (

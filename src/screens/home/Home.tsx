@@ -10,8 +10,8 @@ import {dark} from '@lib/colors/theme.ts';
 // @ts-ignore
 import {fontSize} from '@lib/fontSize';
 
-import LocationContextProvider from '../../context/location.context';
-import {DeviceContext} from '../../context/device.context';
+import LocationContextProvider from '../../context/Location.context';
+import {DeviceContext} from '../../context/Device.context';
 import HomeDeviceInfoList from './components/Home.DeviceInfoList';
 
 let deviceNum = 2;

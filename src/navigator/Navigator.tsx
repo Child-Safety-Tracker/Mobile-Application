@@ -30,8 +30,8 @@ import SettingIconFill from '@assets/icons/navigator/settings-fill.svg';
 import SettingIconLine from '@assets/icons/navigator/settings-line.svg';
 
 import {dark} from '@lib/colors/theme';
-import LocationContextProvider from '../context/location.context';
-import {DeviceContext} from '../context/device.context';
+import LocationContextProvider from '../context/Location.context';
+import {DeviceContext} from '../context/Device.context';
 
 // Create a bottom tab navigator
 const Tab = createBottomTabNavigator();
