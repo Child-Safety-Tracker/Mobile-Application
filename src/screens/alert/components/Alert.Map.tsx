@@ -11,6 +11,7 @@ import {AlertContext} from '../../../context/Alert.context';
 const AlertMap = ({selectedIndex}: {selectedIndex: number}) => {
   const {location}: any = useContext(LocationContext);
   const {pressedCoordinate}: any = useContext(AlertContext);
+  const {safeZoneRadius}: any = useContext(AlertContext);
 
   let pointAnnotationComponents: any[] = [];
 
@@ -37,7 +38,7 @@ const AlertMap = ({selectedIndex}: {selectedIndex: number}) => {
         }
         id={index.toString()}
         key={element.id + 'Zone'}>
-        <View style={styles.safeZone}></View>
+        <View style={{...styles.safeZone, height: safeZoneRadius * 41}}></View>
       </PointAnnotation>,
     );
   });
@@ -80,8 +81,7 @@ const styles = StyleSheet.create({
   safeZone: {
     backgroundColor: 'rgba(148, 226, 213, 0.3)',
     opacity: 0.2,
-    height: 150,
-    width: 150,
+    aspectRatio: 1,
     borderWidth: 1,
     borderRadius: '100%',
     borderColor: 'black',

@@ -39,9 +39,16 @@ const AlertScreen = () => {
     const X = location[selectedIndex].payload.longitude - pressedCoordinate[0];
     const Y = location[selectedIndex].payload.latitude - pressedCoordinate[1];
 
-    const distance = Math.sqrt(X * X + Y * Y);
+    const distance = Math.sqrt(X * X + Y * Y) * 10000;
 
-    if (distance > safeZoneRadius) {
+    console.log(distance)
+
+    if (
+      pressedCoordinate.length !== 0 &&
+      safeZoneRadius !== 0 &&
+      distance > safeZoneRadius
+    ) {
+      console.log(distance);
       console.log('Out of zone');
 
       alertSound.play(success => {
@@ -66,8 +73,16 @@ const AlertScreen = () => {
           }
           selectedDevice={selectedIndex}
           configName={'Reference'}
-          configValue1={'16°05\'09.8"N'}
-          configValue2={'108°09\'04.5"E'}
+          configValue1={
+            pressedCoordinate.length !== 0
+              ? pressedCoordinate[0].toFixed(6)
+              : null
+          }
+          configValue2={
+            pressedCoordinate.length !== 0
+              ? pressedCoordinate[1].toFixed(6)
+              : null
+          }
         />
         <View style={styles.alertConfigurationSeparator} />
         <AlertConfiguration
@@ -80,7 +95,7 @@ const AlertScreen = () => {
           }
           selectedDevice={selectedIndex}
           configName={'Boundary'}
-          configValue1={'100m'}
+          configValue1={safeZoneRadius}
           configValue2={''}
         />
       </View>
