@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+import Sound from 'react-native-sound';
 
 import AlertHeading from './components/Alert.Heading';
 import AlertConfiguration from './components/Alert.Configuration';
@@ -14,15 +15,19 @@ import FlagFillIcon from '@assets/icons/screens/alert/flag-fill.svg';
 import BoundaryLineIcon from '@assets/icons/screens/alert/boundary-line.svg';
 import {AlertContext} from '../../context/Alert.context';
 import {LocationContext} from '../../context/Location.context';
-import Mapbox from '@rnmapbox/maps';
 
-const ReferenceIcon = () => (
-  <FlagFillIcon width={20} height={20} fill={dark.colors.text.hex} />
-);
+// Enable playback in silence mode
+Sound.setCategory('Playback');
 
-const BoundaryIcon = () => (
-  <BoundaryLineIcon width={20} height={20} fill={dark.colors.text.hex} />
-);
+// Load the sound file
+const alertSound = new Sound('siren_alert.sound', Sound.MAIN_BUNDLE, error => {
+  if (error) {
+    console.log('[Alert] Failed to load the sound');
+    console.log(error);
+  }
+
+  console.log('[Alert] Load sound successfully');
+});
 
 const AlertScreen = () => {
   const {pressedCoordinate, safeZoneRadius}: any = useContext(AlertContext);
@@ -38,6 +43,14 @@ const AlertScreen = () => {
 
     if (distance > safeZoneRadius) {
       console.log('Out of zone');
+
+      alertSound.play(success => {
+        if (success) {
+          console.log('[Alert] Successfully play the alert sound');
+        } else {
+          console.log('[Alert] Failed to play the alert sound');
+        }
+      });
     }
   }
 
@@ -48,7 +61,9 @@ const AlertScreen = () => {
       </View>
       <View style={styles.alertConfigurationWrapper}>
         <AlertConfiguration
-          icon={<ReferenceIcon />}
+          icon={
+            <FlagFillIcon width={20} height={20} fill={dark.colors.text.hex} />
+          }
           selectedDevice={selectedIndex}
           configName={'Reference'}
           configValue1={'16°05\'09.8"N'}
@@ -56,7 +71,13 @@ const AlertScreen = () => {
         />
         <View style={styles.alertConfigurationSeparator} />
         <AlertConfiguration
-          icon={<BoundaryIcon />}
+          icon={
+            <BoundaryLineIcon
+              width={20}
+              height={20}
+              fill={dark.colors.text.hex}
+            />
+          }
           selectedDevice={selectedIndex}
           configName={'Boundary'}
           configValue1={'100m'}
