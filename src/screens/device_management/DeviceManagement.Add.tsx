@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {
   useCameraDevice,
@@ -9,8 +9,12 @@ import {
 
 // @ts-ignore
 import QRScanIcon from '@assets/icons/screens/device_management/QR_scan_white.svg';
+import DeviceManagementAddStatus from './DeviceManagement.Add.Status';
 
 const DeviceManagementAdd = () => {
+  const [scanned, setScanned] = useState(false);
+  const [activeCamera, setActiveCamera] = useState(true);
+
   // Check for camera permission
   const {hasPermission, requestPermission} = useCameraPermission();
   if (!hasPermission) {
@@ -25,6 +29,8 @@ const DeviceManagementAdd = () => {
   const codeScanner = useCodeScanner({
     codeTypes: ['qr'],
     onCodeScanned: code => {
+      setScanned(true);
+      setActiveCamera(false);
       console.log(
         `Scanned ${code.length} codes with value of: ${code[0].value}`,
       );
@@ -36,7 +42,7 @@ const DeviceManagementAdd = () => {
       <Camera
         style={styles.cameraView}
         device={camera}
-        isActive={true}
+        isActive={activeCamera}
         codeScanner={codeScanner}
       />
       <View
@@ -47,7 +53,11 @@ const DeviceManagementAdd = () => {
           width: '100%',
           height: '100%',
         }}>
-        <QRScanIcon width={300} height={300} color="white" />
+        {scanned ? (
+          <DeviceManagementAddStatus />
+        ) : (
+          <QRScanIcon width={300} height={300} color="white" />
+        )}
       </View>
     </View>
   );
