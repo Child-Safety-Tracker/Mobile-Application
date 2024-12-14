@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {
   useCameraDevice,
@@ -14,6 +14,7 @@ import DeviceManagementAddStatus from './DeviceManagement.Add.Status';
 const DeviceManagementAdd = () => {
   const [scanned, setScanned] = useState(false);
   const [activeCamera, setActiveCamera] = useState(true);
+  const [successScan, setSuccessScan] = useState(false);
 
   // Check for camera permission
   const {hasPermission, requestPermission} = useCameraPermission();
@@ -29,11 +30,25 @@ const DeviceManagementAdd = () => {
   const codeScanner = useCodeScanner({
     codeTypes: ['qr'],
     onCodeScanned: code => {
+      console.log(code[0].value);
+      // Check if the scanned string is JSON string
+      if (code[0].value![0] === '{' || code[0].value![0] === '[') {
+        console.log('First condition block get called');
+        const parsedString = JSON.parse(code[0].value!);
+        // Check every field for validation
+        if (
+          typeof parsedString.deviceId !== 'undefined' ||
+          typeof parsedString.userId !== 'undefined' ||
+          typeof parsedString.privateKey !== 'undefined'
+        ) {
+          console.log('Second condition block get called');
+          setSuccessScan(true);
+        }
+      } else {
+        setSuccessScan(false);
+      }
       setScanned(true);
       setActiveCamera(false);
-      console.log(
-        `Scanned ${code.length} codes with value of: ${code[0].value}`,
-      );
     },
   });
 
@@ -45,10 +60,9 @@ const DeviceManagementAdd = () => {
         isActive={activeCamera}
         codeScanner={codeScanner}
       />
-      <View
-        style={styles.statusContainer}>
+      <View style={styles.statusContainer}>
         {scanned ? (
-          <DeviceManagementAddStatus success={true} />
+          <DeviceManagementAddStatus success={successScan} />
         ) : (
           <QRScanIcon width={300} height={300} color="white" />
         )}
@@ -74,5 +88,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     height: '100%',
-  }
+  },
 });
