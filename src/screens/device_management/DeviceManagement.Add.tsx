@@ -46,15 +46,9 @@ const DeviceManagementAdd = () => {
         codeScanner={codeScanner}
       />
       <View
-        style={{
-          position: 'absolute',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%',
-          height: '100%',
-        }}>
+        style={styles.statusContainer}>
         {scanned ? (
-          <DeviceManagementAddStatus />
+          <DeviceManagementAddStatus success={true} />
         ) : (
           <QRScanIcon width={300} height={300} color="white" />
         )}
@@ -73,4 +67,12 @@ const styles = StyleSheet.create({
   cameraView: {
     flex: 1,
   },
+
+  statusContainer: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+  }
 });

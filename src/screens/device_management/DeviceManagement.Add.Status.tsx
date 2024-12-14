@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {dark} from '@lib/colors/theme';
 
 // @ts-ignore
@@ -10,15 +10,7 @@ import {fontSize} from '../../../lib/fontSize';
 
 const DeviceManagementAddStatus = ({success}: {success: boolean}) => {
   return (
-    <View
-      style={{
-        backgroundColor: dark.colors.base.hex,
-        borderRadius: 20,
-        width: '50%',
-        aspectRatio: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+    <View style={styles.container}>
       {success ? (
         <QRScanSuccessIcon
           width={80}
@@ -28,16 +20,26 @@ const DeviceManagementAddStatus = ({success}: {success: boolean}) => {
       ) : (
         <QRScanFailureIcon width={80} height={80} color={dark.colors.red.hex} />
       )}
-      <Text
-        style={{
-          marginTop: 20,
-          fontSize: fontSize.text.mediumLarge,
-          color: dark.colors.text.hex,
-        }}>
-        {success ? 'Success' : 'Error'}
-      </Text>
+      <Text style={styles.message}>{success ? 'Success' : 'Error'}</Text>
     </View>
   );
 };
 
 export default DeviceManagementAddStatus;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: dark.colors.base.hex,
+    borderRadius: 20,
+    width: '50%',
+    aspectRatio: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  message: {
+    marginTop: 20,
+    fontSize: fontSize.text.mediumLarge,
+    color: dark.colors.text.hex,
+  },
+});
