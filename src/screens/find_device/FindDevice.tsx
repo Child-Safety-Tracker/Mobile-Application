@@ -3,13 +3,19 @@ import React from 'react';
 
 import {dark} from '@lib/colors/theme';
 import FindDeviceHeading from './components/FindDevice.Heading';
+import FindDeviceSelection from './components/FindDevice.Selection';
 
 const FindDeviceScreen = () => {
-  return <View style={styles.container}>
-    <View style={styles.headingWrapper}>
-      <FindDeviceHeading />
+  return (
+    <View style={styles.container}>
+      <View style={styles.headingWrapper}>
+        <FindDeviceHeading />
+      </View>
+      <View style={styles.findDeviceSelectionWrapper}>
+        <FindDeviceSelection />
+      </View>
     </View>
-  </View>;
+  );
 };
 
 export default FindDeviceScreen;
@@ -23,6 +29,10 @@ const styles = StyleSheet.create({
   },
 
   headingWrapper: {
-    flex: 0.1
-  }
+    flex: 0.1,
+  },
+
+  findDeviceSelectionWrapper: {
+    flex: 0.12,
+  },
 });
