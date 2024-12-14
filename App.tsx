@@ -4,12 +4,15 @@ import React from 'react';
 import Navigator from './src/navigator/Navigator';
 
 import DeviceContextProvider from './src/context/Device.context';
+import AuthenticationContextProvider from './src/context/Authentication.context';
 
 const App = (): React.JSX.Element => {
   return (
-    <DeviceContextProvider>
-      <Navigator />;
-    </DeviceContextProvider>
+    <AuthenticationContextProvider>
+      <DeviceContextProvider>
+        <Navigator />;
+      </DeviceContextProvider>
+    </AuthenticationContextProvider>
   );
 };
 
