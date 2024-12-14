@@ -12,9 +12,9 @@ import {fontSize} from '@lib/fontSize';
 
 // @ts-ignore
 import GoogleIcon from '@assets/icons/screens/authentication/google-fill.svg';
-
 // @ts-ignore
 import FacebookIcon from '@assets/icons/screens/authentication/facebook-fill.svg';
+import {useNavigation} from '@react-navigation/native';
 
 const InformationInput = ({description}: {description: string}) => {
   const [text, setText] = useState('');
@@ -41,6 +41,8 @@ const OAuthButton = ({icon}: {icon: any}) => {
 };
 
 const AuthenticationLogin = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.headingContainer}>
@@ -68,7 +70,9 @@ const AuthenticationLogin = () => {
           }
         />
       </View>
-      <TouchableOpacity style={styles.registerContainer}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Register' as never)}
+        style={styles.registerContainer}>
         <Text style={styles.registerText}>Register</Text>
       </TouchableOpacity>
     </View>
