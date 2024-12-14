@@ -8,7 +8,7 @@ export const device_request = async (userId: string) => {
 };
 
 export const updateDeviceStatus = async (requestBody: any) => {
-  return await fetch(PRIVATE_SERVER_ADDRESS + '/device', {
+  return await fetch(PRIVATE_SERVER_ADDRESS + '/device/status', {
     method: 'POST',
     headers: {
       Accept: 'application/json',

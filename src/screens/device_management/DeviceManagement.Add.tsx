@@ -22,7 +22,7 @@ const DeviceManagementAdd = () => {
   const codeScanner = useCodeScanner({
     codeTypes: ['qr'],
     onCodeScanned: code => {
-      console.log(`Scanned ${code.length} codes.`);
+      console.log(`Scanned ${code.length} codes with value of: ${code[0].value}`);
     },
   });
 
