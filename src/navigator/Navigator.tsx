@@ -1,9 +1,7 @@
 import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import HomeScreen from '@screens/home/Home';
-import AlertScreen from '@screens/alert/Alert';
 import FindDeviceScreen from '../screens/find_device/FindDevice';
-import DeviceManagementScreen from '../screens/device_management/DeviceManagement';
 import SettingScreen from '../screens/settings/Settings';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -33,6 +31,7 @@ import {dark} from '@lib/colors/theme';
 import LocationContextProvider from '../context/Location.context';
 import {DeviceContext} from '../context/Device.context';
 import AlertStackNavigator from './Alert.Navigator';
+import DeviceManagementNavigator from './DeviceManagement.Navigator';
 
 // Create a bottom tab navigator
 const Tab = createBottomTabNavigator();
@@ -102,7 +101,7 @@ const Navigator = () => {
                     />
                   );
                   break;
-                case 'DeviceManagement':
+                case 'DeviceManagement Navigator':
                   returnedIcon = focused ? (
                     <DevicesIconFill
                       width={size}
@@ -140,8 +139,8 @@ const Navigator = () => {
           <Tab.Screen name="Alert Navigator" component={AlertStackNavigator} />
           <Tab.Screen name="FindDevice" component={FindDeviceScreen} />
           <Tab.Screen
-            name="DeviceManagement"
-            component={DeviceManagementScreen}
+            name="DeviceManagement Navigator"
+            component={DeviceManagementNavigator}
           />
           <Tab.Screen name="Setting" component={SettingScreen} />
         </Tab.Navigator>

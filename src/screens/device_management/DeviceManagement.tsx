@@ -8,6 +8,7 @@ import {dark} from '@lib/colors/theme';
 import {deviceColors} from '@lib/colors/device';
 import {DeviceContext} from '../../context/Device.context';
 import LocationContextProvider from '../../context/Location.context';
+import {useNavigation} from '@react-navigation/native';
 
 const deviceInfo = [
   {
@@ -27,6 +28,7 @@ const deviceInfo = [
 const Separator = () => <View style={{height: 15}} />;
 
 const DeviceManagementScreen = () => {
+  const navigation = useNavigation();
   const {device}: any = useContext(DeviceContext);
   return (
     <LocationContextProvider>
@@ -54,6 +56,9 @@ const DeviceManagementScreen = () => {
           />
         </View>
         <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('DeviceManagementAdd' as never);
+          }}
           style={{
             bottom: 20,
             height: 50,
