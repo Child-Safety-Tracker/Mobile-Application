@@ -6,8 +6,15 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+
 import {dark} from '@lib/colors/theme';
 import {fontSize} from '@lib/fontSize';
+
+// @ts-ignore
+import GoogleIcon from '@assets/icons/screens/authentication/google-fill.svg';
+
+// @ts-ignore
+import FacebookIcon from '@assets/icons/screens/authentication/facebook-fill.svg';
 
 const InformationInput = ({description}: {description: string}) => {
   const [text, setText] = useState('');
@@ -47,6 +54,22 @@ const Separator = ({height}: {height: number}) => {
   );
 };
 
+const OAuthButton = ({icon}: {icon: any}) => {
+  return (
+    <TouchableOpacity
+      style={{
+        height: 55,
+        borderRadius: 13,
+        borderWidth: 1,
+        borderColor: dark.colors.subtext0.hex,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      {icon}
+    </TouchableOpacity>
+  );
+};
+
 const AuthenticationLogin = () => {
   return (
     <View style={styles.container}>
@@ -80,13 +103,28 @@ const AuthenticationLogin = () => {
             backgroundColor: dark.colors.teal.hex,
             justifyContent: 'center',
           }}>
-          <Text style={{
-            textAlign: 'center',
-            fontSize: fontSize.text.mediumLarge,
-            fontWeight: 500,
-            color: dark.colors.crust.hex,
-          }}>Submit</Text>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: fontSize.text.mediumLarge,
+              fontWeight: 500,
+              color: dark.colors.crust.hex,
+            }}>
+            Submit
+          </Text>
         </TouchableOpacity>
+        <Separator height={30} />
+        <OAuthButton
+          icon={
+            <GoogleIcon width={35} height={35} color={dark.colors.teal.hex} />
+          }
+        />
+        <Separator height={20} />
+        <OAuthButton
+          icon={
+            <FacebookIcon width={35} height={35} color={dark.colors.teal.hex} />
+          }
+        />
       </View>
     </View>
   );
