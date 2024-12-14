@@ -7,6 +7,9 @@ import {
   useCodeScanner,
 } from 'react-native-vision-camera';
 
+// @ts-ignore
+import QRScanIcon from '@assets/icons/screens/device_management/QR_scan_white.svg';
+
 const DeviceManagementAdd = () => {
   // Check for camera permission
   const {hasPermission, requestPermission} = useCameraPermission();
@@ -22,7 +25,9 @@ const DeviceManagementAdd = () => {
   const codeScanner = useCodeScanner({
     codeTypes: ['qr'],
     onCodeScanned: code => {
-      console.log(`Scanned ${code.length} codes with value of: ${code[0].value}`);
+      console.log(
+        `Scanned ${code.length} codes with value of: ${code[0].value}`,
+      );
     },
   });
 
@@ -34,6 +39,16 @@ const DeviceManagementAdd = () => {
         isActive={true}
         codeScanner={codeScanner}
       />
+      <View
+        style={{
+          position: 'absolute',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: '100%',
+        }}>
+        <QRScanIcon width={300} height={300} color="white" />
+      </View>
     </View>
   );
 };
