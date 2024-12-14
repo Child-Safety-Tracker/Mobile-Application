@@ -4,6 +4,7 @@ import {
   useCameraDevice,
   useCameraPermission,
   Camera,
+  useCodeScanner,
 } from 'react-native-vision-camera';
 
 const DeviceManagementAdd = () => {
@@ -18,9 +19,21 @@ const DeviceManagementAdd = () => {
     console.log('[DeviceManagement] No camera device');
   }
 
+  const codeScanner = useCodeScanner({
+    codeTypes: ['qr'],
+    onCodeScanned: code => {
+      console.log(`Scanned ${code.length} codes.`);
+    },
+  });
+
   return camera == null ? null : (
     <View style={styles.container}>
-      <Camera style={styles.cameraView} device={camera} isActive={true} />
+      <Camera
+        style={styles.cameraView}
+        device={camera}
+        isActive={true}
+        codeScanner={codeScanner}
+      />
     </View>
   );
 };
