@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -15,6 +15,7 @@ import GoogleIcon from '@assets/icons/screens/authentication/google-fill.svg';
 // @ts-ignore
 import FacebookIcon from '@assets/icons/screens/authentication/facebook-fill.svg';
 import {useNavigation} from '@react-navigation/native';
+import {AuthenticationContext} from '../../context/Authentication.context';
 
 const InformationInput = ({description}: {description: string}) => {
   const [text, setText] = useState('');
@@ -37,7 +38,15 @@ const Separator = ({height}: {height: number}) => {
 };
 
 const OAuthButton = ({icon}: {icon: any}) => {
-  return <TouchableOpacity style={styles.OAuthButton}>{icon}</TouchableOpacity>;
+  const {setIsLoggedIn}: any = useContext(AuthenticationContext);
+  return (
+    <TouchableOpacity
+      onPress={() =>
+        setTimeout(() => setIsLoggedIn(true), 1000)}
+      style={styles.OAuthButton}>
+      {icon}
+    </TouchableOpacity>
+  );
 };
 
 const AuthenticationLogin = () => {
