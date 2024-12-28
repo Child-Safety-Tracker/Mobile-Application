@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import HomeScreen from '@screens/home/Home';
+import HomeScreen from '../screens/home/Home';
 import FindDeviceScreen from '../screens/find_device/FindDevice';
 import SettingScreen from '../screens/settings/Settings';
 
