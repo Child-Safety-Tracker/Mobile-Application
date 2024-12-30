@@ -30,10 +30,8 @@ let devices = [
 
 const AlertDeviceSelection = ({updateIndex}: any) => {
   const {device}: any = useContext(DeviceContext);
-
   // Trim the menu elements
   const trimmedDevice = devices.slice(0, device.length);
-
 
   const [value, setValue] = React.useState(trimmedDevice[0]);
 

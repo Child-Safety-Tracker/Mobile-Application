@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Mapbox, {Camera, UserLocation} from '@rnmapbox/maps';
 
-const FindDeviceMap = () => {
+const FindDeviceMap = ({selectedIndex}: {selectedIndex: number}) => {
   return (
     <View style={styles.container}>
       <Mapbox.MapView

@@ -5,21 +5,21 @@ import {dark} from '@lib/colors/theme';
 import FindDeviceHeading from './components/FindDevice.Heading';
 import FindDeviceSelection from './components/FindDevice.Selection';
 
-// @ts-ignore
-import UserLocationIcon from '@assets/icons/screens/find_device/circle-dot.svg';
 import FindDeviceMap from './components/FindDevice.Map';
 
 const FindDeviceScreen = () => {
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  console.log(selectedIndex);
   return (
     <View style={styles.container}>
       <View style={styles.headingWrapper}>
         <FindDeviceHeading />
       </View>
       <View style={styles.findDeviceSelectionWrapper}>
-        <FindDeviceSelection />
+        <FindDeviceSelection updateIndex={setSelectedIndex} />
       </View>
       <View style={styles.findDeviceMapWrapper}>
-        <FindDeviceMap />
+        <FindDeviceMap selectedIndex={selectedIndex} />
       </View>
     </View>
   );

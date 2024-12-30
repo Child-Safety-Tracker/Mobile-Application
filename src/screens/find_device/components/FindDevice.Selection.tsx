@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Dropdown} from 'react-native-element-dropdown';
 import {StyleSheet} from 'react-native';
+
+import {DeviceContext} from '../../../context/Device.context';
 
 import {dark} from '@lib/colors/theme';
 import {deviceColors} from '@lib/colors/device';
@@ -28,9 +30,12 @@ let devices = [
   },
 ];
 
-const FindDeviceSelection = () => {
+const FindDeviceSelection = ({updateIndex} : {updateIndex: any}) => {
+  const {device}: any = useContext(DeviceContext);
+  // Trim the menu elements
+  const trimmedDevice = devices.slice(0, device.length);
 
-  const [value, setValue] = React.useState(devices[0]);
+  const [value, setValue] = React.useState(trimmedDevice[0]);
   const [isFocused, setIsFocused] = React.useState(false);
 
   return (
@@ -42,8 +47,8 @@ const FindDeviceSelection = () => {
       activeColor={dark.colors.base.hex}
       selectedTextStyle={styles.text}
       placeholderStyle={styles.text}
-      data={devices}
-      value={devices[0]}
+      data={trimmedDevice}
+      value={trimmedDevice[0]}
       labelField={'label'}
       valueField={'value'}
       renderLeftIcon={() => (
@@ -66,6 +71,7 @@ const FindDeviceSelection = () => {
       }
       onChange={item => {
         setValue(item);
+        updateIndex(item.value);
         setIsFocused(false);
       }}
       onFocus={() => setIsFocused(true)}
