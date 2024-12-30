@@ -6,7 +6,7 @@ import {fontSize} from '@lib/fontSize';
 import {dark} from '@lib/colors/theme';
 
 const FindDeviceHeading = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>Find Device</Text>

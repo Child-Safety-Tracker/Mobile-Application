@@ -7,6 +7,7 @@ import FindDeviceSelection from './components/FindDevice.Selection';
 
 // @ts-ignore
 import UserLocationIcon from '@assets/icons/screens/find_device/circle-dot.svg';
+import FindDeviceMap from './components/FindDevice.Map';
 
 const FindDeviceScreen = () => {
   return (
@@ -17,8 +18,8 @@ const FindDeviceScreen = () => {
       <View style={styles.findDeviceSelectionWrapper}>
         <FindDeviceSelection />
       </View>
-      <View style={styles.findDeviceIndicatorWrapper}>
-        <UserLocationIcon width={30} height={30} color={dark.colors.teal.hex} />
+      <View style={styles.findDeviceMapWrapper}>
+        <FindDeviceMap />
       </View>
     </View>
   );
@@ -42,9 +43,7 @@ const styles = StyleSheet.create({
     flex: 0.12,
   },
 
-  findDeviceIndicatorWrapper: {
-    flex: 0.48,
-    justifyContent: 'center',
-    alignItems: 'center',
+  findDeviceMapWrapper: {
+    flex: 0.75,
   },
 });
