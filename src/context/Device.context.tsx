@@ -3,7 +3,6 @@ import React, {
   createContext,
   useEffect,
   useCallback,
-  useRef,
 } from 'react';
 import {device_request, updateDeviceStatus} from '../APIs/device';
 

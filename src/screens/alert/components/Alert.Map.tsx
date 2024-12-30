@@ -5,7 +5,7 @@ import {LocationContext} from '../../../context/Location.context';
 
 // @ts-ignore
 import MapPinFillIcon from '@assets/icons/screens/home/map-pin-fill.svg';
-import {deviceColors} from '@lib/colors/device';
+import {deviceColorsDark} from '@lib/colors/device';
 import {AlertContext} from '../../../context/Alert.context';
 
 const AlertMap = ({selectedIndex}: {selectedIndex: number}) => {
@@ -24,7 +24,7 @@ const AlertMap = ({selectedIndex}: {selectedIndex: number}) => {
         <MapPinFillIcon
           width={25}
           height={25}
-          color={Object.values(deviceColors)[index]}
+          color={Object.values(deviceColorsDark)[index]}
         />
       </PointAnnotation>,
     );

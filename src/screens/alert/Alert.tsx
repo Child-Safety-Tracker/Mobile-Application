@@ -41,8 +41,6 @@ const AlertScreen = () => {
 
     const distance = Math.sqrt(X * X + Y * Y) * 10000;
 
-    console.log(distance)
-
     if (
       pressedCoordinate.length !== 0 &&
       safeZoneRadius !== 0 &&
@@ -133,11 +131,11 @@ const styles = StyleSheet.create({
   },
 
   alertDeviceSelectionWrapper: {
-    flex: 0.15,
+    flex: 0.12,
     justifyContent: 'center',
   },
 
   alertMapWrapper: {
-    flex: 0.62,
+    flex: 0.65,
   },
 });
