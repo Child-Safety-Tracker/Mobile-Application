@@ -1,15 +1,92 @@
-import {View, StyleSheet} from 'react-native';
-import React from 'react';
+import {View, StyleSheet, Animated, useAnimatedValue} from 'react-native';
+import React, {useContext, useEffect, useRef, useState} from 'react';
+import Geolocation from '@react-native-community/geolocation';
+import {
+  orientation,
+  setUpdateIntervalForType,
+  SensorTypes,
+} from 'react-native-sensors';
 
 import {dark} from '@lib/colors/theme';
 import FindDeviceHeading from './components/FindDevice.Heading';
 import FindDeviceSelection from './components/FindDevice.Selection';
 
-import FindDeviceMap from './components/FindDevice.Map';
+// @ts-ignore
+import ArrowIcon from '@assets/icons/screens/find_device/arrow.svg';
+import {LocationContext} from '../../context/Location.context';
+import Value = Animated.Value;
+
+setUpdateIntervalForType(SensorTypes.orientation, 200); // defaults to 100ms
 
 const FindDeviceScreen = () => {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-  console.log(selectedIndex);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  // const [rotation, setRotation] = useState(0);
+  const rotation = useAnimatedValue(0);
+  const {location}: any = useContext(LocationContext);
+
+  // Register the sensor read operation
+  const subscription = orientation.subscribe(
+    ({qx, qy, qz, qw, pitch, roll, yaw, timestamp}) => {
+      // Convert Euler angles to rotation matrix
+      const cosYaw = Math.cos(yaw);
+      const sinYaw = Math.sin(yaw);
+      const cosPitch = Math.cos(pitch);
+      const sinPitch = Math.sin(pitch);
+      const cosRoll = Math.cos(roll);
+      const sinRoll = Math.sin(roll);
+
+      const rotationMatrix = [
+        cosYaw * cosPitch,
+        cosYaw * sinPitch * sinRoll - sinYaw * cosRoll,
+        cosYaw * sinPitch * cosRoll + sinYaw * sinRoll,
+        sinYaw * cosPitch,
+        sinYaw * sinPitch * sinRoll + cosYaw * cosRoll,
+        sinYaw * sinPitch * cosRoll - cosYaw * sinRoll,
+        -sinPitch,
+        cosPitch * sinRoll,
+        cosPitch * cosRoll,
+      ];
+
+      // Angle calculation (in degrees)
+      const angle = Math.atan2(rotationMatrix[1], rotationMatrix[0]);
+
+      // Animated view configuration
+      Animated.timing(rotation, {
+        toValue: angle,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    },
+  );
+
+  Geolocation.setRNConfiguration({
+    skipPermissionRequests: true,
+    locationProvider: 'android',
+  });
+
+  Geolocation.getCurrentPosition(
+    userLocation => {
+      console.log(userLocation);
+
+      const selectedDeviceLocation = location[selectedIndex].payload;
+
+      const X =
+        selectedDeviceLocation.longitude - userLocation.coords.longitude;
+      const Y = selectedDeviceLocation.latitude - userLocation.coords.latitude;
+
+      const distance = Math.sqrt(X * X + Y * Y) * 10000;
+    },
+    error => {
+      console.log(error);
+    },
+    {
+      timeout: 5000,
+      maximumAge: 0,
+      enableHighAccuracy: false,
+    },
+  );
+
+  console.log(rotation);
   return (
     <View style={styles.container}>
       <View style={styles.headingWrapper}>
@@ -18,9 +95,20 @@ const FindDeviceScreen = () => {
       <View style={styles.findDeviceSelectionWrapper}>
         <FindDeviceSelection updateIndex={setSelectedIndex} />
       </View>
-      <View style={styles.findDeviceMapWrapper}>
-        <FindDeviceMap selectedIndex={selectedIndex} />
-      </View>
+      <Animated.View
+        style={{
+          ...styles.findDeviceIndicatorWrapper,
+          transform: [
+            {
+              rotate: rotation.interpolate({
+                inputRange: [0, 2 * Math.PI],
+                outputRange: [`${0}deg`, `${360}deg`],
+              }),
+            },
+          ],
+        }}>
+        <ArrowIcon width={170} height={170} color={dark.colors.teal.hex} />
+      </Animated.View>
     </View>
   );
 };
@@ -43,7 +131,9 @@ const styles = StyleSheet.create({
     flex: 0.12,
   },
 
-  findDeviceMapWrapper: {
-    flex: 0.75,
+  findDeviceIndicatorWrapper: {
+    flex: 0.7,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
