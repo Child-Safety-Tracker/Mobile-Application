@@ -1,5 +1,5 @@
 import {View, StyleSheet, Animated, useAnimatedValue} from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import Geolocation from '@react-native-community/geolocation';
 import {
   orientation,
@@ -21,6 +21,9 @@ setUpdateIntervalForType(SensorTypes.orientation, 200); // defaults to 100ms
 const FindDeviceScreen = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const rotation = useAnimatedValue(0);
+
+  // The tracking device angle with respect to user location for direction
+  const trackingDeviceAngle = useRef(0);
 
   // Register the sensor read operation
   const subscription = orientation.subscribe(
@@ -50,7 +53,7 @@ const FindDeviceScreen = () => {
 
       // Animated view configuration
       Animated.timing(rotation, {
-        toValue: angle,
+        toValue: angle + trackingDeviceAngle.current,
         duration: 300,
         useNativeDriver: true,
       }).start();
@@ -66,7 +69,7 @@ const FindDeviceScreen = () => {
         <FindDeviceSelection updateIndex={setSelectedIndex} />
       </View>
       <View style={styles.findDeviceDistanceWrapper}>
-        <FindDeviceDistance selectedIndex={selectedIndex} />
+        <FindDeviceDistance deviceIndex={selectedIndex} trackingDeviceAngle={trackingDeviceAngle}/>
       </View>
       <Animated.View
         style={{

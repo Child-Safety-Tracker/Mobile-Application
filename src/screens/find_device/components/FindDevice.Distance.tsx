@@ -5,7 +5,13 @@ import Geolocation from '@react-native-community/geolocation';
 import {dark} from '../../../../lib/colors/theme';
 import {fontSize} from '../../../../lib/fontSize';
 
-const FindDeviceDistance = ({selectedIndex}: {selectedIndex: number}) => {
+const FindDeviceDistance = ({
+  deviceIndex,
+  trackingDeviceAngle,
+}: {
+  deviceIndex: number;
+  trackingDeviceAngle: any;
+}) => {
   const {location}: any = useContext(LocationContext);
   const [distance, setDistance] = useState('');
 
@@ -16,9 +22,7 @@ const FindDeviceDistance = ({selectedIndex}: {selectedIndex: number}) => {
 
   Geolocation.getCurrentPosition(
     userLocation => {
-      console.log(userLocation);
-
-      const selectedDeviceLocation = location[selectedIndex].payload;
+      const selectedDeviceLocation = location[deviceIndex].payload;
 
       const X =
         selectedDeviceLocation.longitude - userLocation.coords.longitude;
@@ -26,10 +30,12 @@ const FindDeviceDistance = ({selectedIndex}: {selectedIndex: number}) => {
 
       const tempDistance = Math.sqrt(X * X + Y * Y) * 100000;
 
+      // Update the direction angle
+      trackingDeviceAngle.current = Math.atan(X / Y) * 180 / Math.PI;
+
       if (tempDistance > 1000) {
-        setDistance(`${tempDistance.toFixed(1)} km`);
-      }
-      else {
+        setDistance(`${(tempDistance / 1000).toFixed(1)} km`);
+      } else {
         setDistance(`${tempDistance.toFixed(1)} m`);
       }
     },
@@ -37,7 +43,7 @@ const FindDeviceDistance = ({selectedIndex}: {selectedIndex: number}) => {
       console.log(error);
     },
     {
-      timeout: 5000,
+      timeout: 2000,
       maximumAge: 0,
       enableHighAccuracy: false,
     },
@@ -62,7 +68,7 @@ const styles = StyleSheet.create({
   },
 
   distanceText: {
-    fontSize: fontSize.text.large,
+    fontSize: fontSize.text.large + 5,
     color: dark.colors.text.hex,
   },
 });

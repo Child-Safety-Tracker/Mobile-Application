@@ -48,7 +48,7 @@ const FindDeviceSelection = ({updateIndex} : {updateIndex: any}) => {
       selectedTextStyle={styles.text}
       placeholderStyle={styles.text}
       data={trimmedDevice}
-      value={trimmedDevice[0]}
+      value={value}
       labelField={'label'}
       valueField={'value'}
       renderLeftIcon={() => (
