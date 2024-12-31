@@ -1,5 +1,5 @@
 import {View, StyleSheet, Animated, useAnimatedValue} from 'react-native';
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Geolocation from '@react-native-community/geolocation';
 import {
   orientation,
@@ -14,15 +14,13 @@ import FindDeviceSelection from './components/FindDevice.Selection';
 // @ts-ignore
 import ArrowIcon from '@assets/icons/screens/find_device/arrow.svg';
 import {LocationContext} from '../../context/Location.context';
-import Value = Animated.Value;
+import FindDeviceDistance from './components/FindDevice.Distance';
 
 setUpdateIntervalForType(SensorTypes.orientation, 200); // defaults to 100ms
 
 const FindDeviceScreen = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  // const [rotation, setRotation] = useState(0);
   const rotation = useAnimatedValue(0);
-  const {location}: any = useContext(LocationContext);
 
   // Register the sensor read operation
   const subscription = orientation.subscribe(
@@ -59,34 +57,6 @@ const FindDeviceScreen = () => {
     },
   );
 
-  Geolocation.setRNConfiguration({
-    skipPermissionRequests: true,
-    locationProvider: 'android',
-  });
-
-  Geolocation.getCurrentPosition(
-    userLocation => {
-      console.log(userLocation);
-
-      const selectedDeviceLocation = location[selectedIndex].payload;
-
-      const X =
-        selectedDeviceLocation.longitude - userLocation.coords.longitude;
-      const Y = selectedDeviceLocation.latitude - userLocation.coords.latitude;
-
-      const distance = Math.sqrt(X * X + Y * Y) * 10000;
-    },
-    error => {
-      console.log(error);
-    },
-    {
-      timeout: 5000,
-      maximumAge: 0,
-      enableHighAccuracy: false,
-    },
-  );
-
-  console.log(rotation);
   return (
     <View style={styles.container}>
       <View style={styles.headingWrapper}>
@@ -94,6 +64,9 @@ const FindDeviceScreen = () => {
       </View>
       <View style={styles.findDeviceSelectionWrapper}>
         <FindDeviceSelection updateIndex={setSelectedIndex} />
+      </View>
+      <View style={styles.findDeviceDistanceWrapper}>
+        <FindDeviceDistance selectedIndex={selectedIndex} />
       </View>
       <Animated.View
         style={{
@@ -129,6 +102,11 @@ const styles = StyleSheet.create({
 
   findDeviceSelectionWrapper: {
     flex: 0.12,
+  },
+
+  findDeviceDistanceWrapper: {
+    flex: 0.1,
+    alignItems: 'center',
   },
 
   findDeviceIndicatorWrapper: {
