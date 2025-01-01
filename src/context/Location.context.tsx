@@ -23,13 +23,14 @@ const LocationContextProvider = ({children}: any) => {
   }
 
   const sendLocationRequest = () => {
+    const start = new Date();
     setIsLoadingLocation(true);
     location_request({
       privateKeys: privateKeys,
       ids: deviceIds,
     })
       .then(result => {
-        console.log(result);
+        console.log(`Response time: ${new Date().getTime() - start.getTime()} ms`);
         setLocation(result);
         setIsLoadingLocation(false);
         console.log('[Location] Successfully fetched locations');

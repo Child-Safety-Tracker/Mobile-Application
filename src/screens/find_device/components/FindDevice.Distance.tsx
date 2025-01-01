@@ -17,7 +17,7 @@ const FindDeviceDistance = ({
 
   Geolocation.setRNConfiguration({
     skipPermissionRequests: true,
-    locationProvider: 'android',
+    locationProvider: 'auto',
   });
 
   Geolocation.getCurrentPosition(

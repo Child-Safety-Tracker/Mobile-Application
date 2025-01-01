@@ -14,15 +14,26 @@ import {fontSize} from '@lib/fontSize';
 import GoogleIcon from '@assets/icons/screens/authentication/google-fill.svg';
 // @ts-ignore
 import FacebookIcon from '@assets/icons/screens/authentication/facebook-fill.svg';
+
 import {useNavigation} from '@react-navigation/native';
 import {AuthenticationContext} from '../../context/Authentication.context';
+import AuthenticationError from './components/Authentication.Error';
 
-const InformationInput = ({description}: {description: string}) => {
-  const [text, setText] = useState('');
+const InformationInput = ({
+  description,
+  text,
+  setText,
+  isPassword,
+}: {
+  description: string;
+  text: string;
+  setText: any;
+  isPassword: boolean;
+}) => {
   return (
     <View>
       <Text style={styles.inputDescription}>{description}</Text>
-      <TextInput style={styles.input} value={text} onChangeText={setText} />
+      <TextInput secureTextEntry={isPassword!} style={styles.input} value={text} onChangeText={setText} />
     </View>
   );
 };
@@ -37,12 +48,16 @@ const Separator = ({height}: {height: number}) => {
   );
 };
 
-const OAuthButton = ({icon}: {icon: any}) => {
-  const {setIsLoggedIn}: any = useContext(AuthenticationContext);
+const OAuthButton = ({
+  icon,
+  setIsLoggedIn,
+}: {
+  icon: any;
+  setIsLoggedIn: any;
+}) => {
   return (
     <TouchableOpacity
-      onPress={() =>
-        setTimeout(() => setIsLoggedIn(true), 1000)}
+      onPress={() => setTimeout(() => setIsLoggedIn(true), 1000)}
       style={styles.OAuthButton}>
       {icon}
     </TouchableOpacity>
@@ -51,6 +66,10 @@ const OAuthButton = ({icon}: {icon: any}) => {
 
 const AuthenticationLogin = () => {
   const navigation = useNavigation();
+  const {setIsLoggedIn}: any = useContext(AuthenticationContext);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorPopup, setErrorPopup] = useState('');
 
   return (
     <View style={styles.container}>
@@ -58,22 +77,49 @@ const AuthenticationLogin = () => {
         <Text style={styles.header}>Login</Text>
       </View>
       <View style={styles.inputContainer}>
-        <InformationInput description={'Username'} />
+        <InformationInput
+          isPassword={false}
+          text={username}
+          setText={setUsername}
+          description={'Username'}
+        />
         <Separator height={20} />
-        <InformationInput description={'Password'} />
+        <InformationInput
+          isPassword={true}
+          text={password}
+          setText={setPassword}
+          description={'Password'}
+        />
         <Separator height={30} />
-        <TouchableOpacity style={styles.submitContainer}>
+        <TouchableOpacity
+          style={styles.submitContainer}
+          onPress={() => {
+            if (username.length === 0 && password.length === 0) {
+              setErrorPopup('Missing username or password');
+              setTimeout(() => setErrorPopup(''), 3000);
+            } else if (username !== 'abcd') {
+              setErrorPopup('User does not exist');
+              setTimeout(() => setErrorPopup(''), 3000);
+            } else if (password !== 'kietvo17112003') {
+              setErrorPopup('Wrong password');
+              setTimeout(() => setErrorPopup(''), 3000);
+            } else {
+              setTimeout(() => setIsLoggedIn(true), 1000);
+            }
+          }}>
           <Text style={styles.submitText}>Submit</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.OAuthContainer}>
         <OAuthButton
+          setIsLoggedIn={setIsLoggedIn}
           icon={
             <GoogleIcon width={35} height={35} color={dark.colors.teal.hex} />
           }
         />
         <Separator height={20} />
         <OAuthButton
+          setIsLoggedIn={setIsLoggedIn}
           icon={
             <FacebookIcon width={35} height={35} color={dark.colors.teal.hex} />
           }
@@ -84,6 +130,9 @@ const AuthenticationLogin = () => {
         style={styles.registerContainer}>
         <Text style={styles.registerText}>Register</Text>
       </TouchableOpacity>
+      {errorPopup.length === 0 ? null : (
+        <AuthenticationError errorPopup={errorPopup} />
+      )}
     </View>
   );
 };

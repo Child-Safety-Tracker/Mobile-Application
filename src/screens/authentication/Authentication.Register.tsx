@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -10,18 +10,30 @@ import {
 import {dark} from '@lib/colors/theme';
 import {fontSize} from '@lib/fontSize';
 
-// @ts-ignore
-import GoogleIcon from '@assets/icons/screens/authentication/google-fill.svg';
-// @ts-ignore
-import FacebookIcon from '@assets/icons/screens/authentication/facebook-fill.svg';
 import {useNavigation} from '@react-navigation/native';
+import {AuthenticationContext} from '../../context/Authentication.context';
+import AuthenticationError from './components/Authentication.Error';
 
-const InformationInput = ({description}: {description: string}) => {
-  const [text, setText] = useState('');
+const InformationInput = ({
+  description,
+  text,
+  setText,
+  isPassword,
+}: {
+  description: string;
+  text: string;
+  setText: any;
+  isPassword: boolean;
+}) => {
   return (
     <View>
       <Text style={styles.inputDescription}>{description}</Text>
-      <TextInput style={styles.input} value={text} onChangeText={setText} />
+      <TextInput
+        secureTextEntry={isPassword!}
+        style={styles.input}
+        value={text}
+        onChangeText={setText}
+      />
     </View>
   );
 };
@@ -38,27 +50,70 @@ const Separator = ({height}: {height: number}) => {
 
 const AuthenticationRegister = () => {
   const navigation = useNavigation();
+
+  const {setIsLoggedIn}: any = useContext(AuthenticationContext);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [repeatedPassword, setRepeatedPassword] = useState('');
+  const [errorPopup, setErrorPopup] = useState('');
   return (
     <View style={styles.container}>
       <View style={styles.headingContainer}>
         <Text style={styles.header}>Register</Text>
       </View>
       <View style={styles.inputContainer}>
-        <InformationInput description={'Username'} />
+        <InformationInput
+          isPassword={false}
+          text={username}
+          setText={setUsername}
+          description={'Username'}
+        />
         <Separator height={20} />
-        <InformationInput description={'Password'} />
+        <InformationInput
+          isPassword={true}
+          text={password}
+          setText={setPassword}
+          description={'Password'}
+        />
         <Separator height={30} />
-        <InformationInput description={'Confirm Password'} />
+        <InformationInput
+          isPassword={true}
+          text={repeatedPassword}
+          setText={setRepeatedPassword}
+          description={'Confirm Password'}
+        />
         <Separator height={35} />
-        <TouchableOpacity style={styles.submitContainer}>
+        <TouchableOpacity
+          style={styles.submitContainer}
+          onPress={() => {
+            console.log(username, password);
+            if (
+              username.length === 0 &&
+              password.length === 0 &&
+              repeatedPassword.length === 0
+            ) {
+              setErrorPopup('Missing username or password');
+              setTimeout(() => setErrorPopup(''), 3000);
+            } else if (username === 'abcd') {
+              setErrorPopup('User exist');
+              setTimeout(() => setErrorPopup(''), 3000);
+            } else {
+              setTimeout(() => setIsLoggedIn(true), 1000);
+            }
+          }}>
           <Text style={styles.submitText}>Submit</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity
-        onPress={() => navigation.navigate('Login' as never)}
-        style={styles.registerContainer}>
+        style={styles.registerContainer}
+        onPress={() => {
+          navigation.goBack();
+        }}>
         <Text style={styles.registerText}>Login</Text>
       </TouchableOpacity>
+      {errorPopup.length === 0 ? null : (
+        <AuthenticationError errorPopup={errorPopup} />
+      )}
     </View>
   );
 };
