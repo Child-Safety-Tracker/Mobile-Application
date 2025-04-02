@@ -11,17 +11,36 @@ import {deviceColorsDark} from '@lib/colors/device';
 // @ts-ignore
 import {OPEN_MAP_PUBLIC_KEY} from '@env';
 import {DeviceContext} from '../../../context/Device.context';
+import {Location7DaysContext} from '../../../context/Location7Days.context';
 
 Mapbox.setAccessToken(OPEN_MAP_PUBLIC_KEY);
 
-const HomeMap = () => {
+const HomeMap = ({showHistory}: {showHistory: boolean}) => {
   const {location, isLoadingLocation}: any = useContext(LocationContext);
-  const {selectedDevice}: any = useContext(DeviceContext);
+  const {locations, isLoadingLocations}: any = useContext(Location7DaysContext);
+  const {device, selectedDevice}: any = useContext(DeviceContext);
+
+  // Map the corresponding list of location histories to device
+  if (!isLoadingLocations) {
+    const deviceLocationHistories = locations[device[selectedDevice].deviceId].map(
+      (locationInfo: any) => {
+        return {
+          longitude: locationInfo.payload.longitude,
+          latitude: locationInfo.payload.latitude,
+        };
+      },
+    );
+    console.log(deviceLocationHistories);
+  }
+
   let coordinates: any[] | undefined;
 
-  // Set the center of Map camera to the selected device
+  // Latest coordinate
   if (!isLoadingLocation) {
-    coordinates = [location[selectedDevice].payload.longitude, location[selectedDevice].payload.latitude];
+    coordinates = [
+      location[selectedDevice].payload.longitude,
+      location[selectedDevice].payload.latitude,
+    ];
   }
 
   // @ts-ignore
@@ -34,9 +53,16 @@ const HomeMap = () => {
         style={styles.map}>
         {location.map((element: any, index: number) => {
           return (
-            <PointAnnotation coordinate={[element.payload.longitude, element.payload.latitude]} id={index.toString()} key={element.id} >
-              <MapPinFillIcon width={25} height={25} color={Object.values(deviceColorsDark)[index]} />
-           </PointAnnotation>
+            <PointAnnotation
+              coordinate={[element.payload.longitude, element.payload.latitude]}
+              id={index.toString()}
+              key={element.id}>
+              <MapPinFillIcon
+                width={25}
+                height={25}
+                color={Object.values(deviceColorsDark)[index]}
+              />
+            </PointAnnotation>
           );
         })}
         <Camera centerCoordinate={coordinates} zoomLevel={17} />

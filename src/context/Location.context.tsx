@@ -9,7 +9,6 @@ const LocationContextProvider = ({children}: any) => {
   const {device, isLoadingDevice}: any = useContext(DeviceContext);
 
   console.log("Location Context Provider get called")
-  console.log(device);
 
   const [location, setLocation] = useState({});
   const [isLoadingLocation, setIsLoadingLocation] = useState(true);
