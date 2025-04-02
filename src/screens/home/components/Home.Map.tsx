@@ -6,12 +6,15 @@ import {LocationContext} from '../../../context/Location.context';
 // @ts-ignore
 import MapPinFillIcon from '@assets/icons/screens/home/map-pin-fill.svg';
 // @ts-ignore
+import CircleDot from '@assets/icons/screens/home/circle-dot.svg'
+// @ts-ignore
 import {deviceColorsDark} from '@lib/colors/device';
 
 // @ts-ignore
 import {OPEN_MAP_PUBLIC_KEY} from '@env';
 import {DeviceContext} from '../../../context/Device.context';
 import {Location7DaysContext} from '../../../context/Location7Days.context';
+import {light} from "../../../../lib/colors/theme";
 
 Mapbox.setAccessToken(OPEN_MAP_PUBLIC_KEY);
 
@@ -21,16 +24,31 @@ const HomeMap = ({showHistory}: {showHistory: boolean}) => {
   const {device, selectedDevice}: any = useContext(DeviceContext);
 
   // Map the corresponding list of location histories to device
+  let locationHistories;
   if (!isLoadingLocations) {
-    const deviceLocationHistories = locations[device[selectedDevice].deviceId].map(
-      (locationInfo: any) => {
-        return {
-          longitude: locationInfo.payload.longitude,
-          latitude: locationInfo.payload.latitude,
-        };
+    locationHistories = locations[device[selectedDevice].deviceId].map(
+      (locationInfo: any, index: number) => {
+        return (
+          <PointAnnotation
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            key={index.toString()}
+            id={index.toString()}
+            coordinate={[
+              locationInfo.payload.longitude,
+              locationInfo.payload.latitude,
+            ]}>
+            <CircleDot
+              width={20}
+              height={20}
+              color={light.colors.teal.hex}
+            />
+          </PointAnnotation>
+        );
       },
     );
-    console.log(deviceLocationHistories);
   }
 
   let coordinates: any[] | undefined;
@@ -43,6 +61,24 @@ const HomeMap = ({showHistory}: {showHistory: boolean}) => {
     ];
   }
 
+  let latestLocations;
+  if (!isLoadingLocation) {
+    latestLocations = location.map((element: any, index: number) => {
+      return (
+        <PointAnnotation
+          coordinate={[element.payload.longitude, element.payload.latitude]}
+          id={index.toString()}
+          key={element.id}>
+          <MapPinFillIcon
+            width={25}
+            height={25}
+            color={Object.values(deviceColorsDark)[index]}
+          />
+        </PointAnnotation>
+      );
+    });
+  }
+
   // @ts-ignore
   return isLoadingLocation ? null : (
     <View style={styles.container}>
@@ -51,20 +87,9 @@ const HomeMap = ({showHistory}: {showHistory: boolean}) => {
         compassEnabled={false}
         attributionEnabled={false}
         style={styles.map}>
-        {location.map((element: any, index: number) => {
-          return (
-            <PointAnnotation
-              coordinate={[element.payload.longitude, element.payload.latitude]}
-              id={index.toString()}
-              key={element.id}>
-              <MapPinFillIcon
-                width={25}
-                height={25}
-                color={Object.values(deviceColorsDark)[index]}
-              />
-            </PointAnnotation>
-          );
-        })}
+        {showHistory && !isLoadingLocations
+          ? locationHistories
+          : latestLocations}
         <Camera centerCoordinate={coordinates} zoomLevel={17} />
       </Mapbox.MapView>
     </View>
