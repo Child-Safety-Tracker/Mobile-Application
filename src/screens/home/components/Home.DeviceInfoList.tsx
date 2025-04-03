@@ -1,10 +1,10 @@
 import React, {useCallback, useContext, useState} from 'react';
 import {
+  FlatList,
+  RefreshControl,
+  StyleSheet,
   TouchableOpacity,
   View,
-  FlatList,
-  StyleSheet,
-  RefreshControl,
 } from 'react-native';
 import HomeDeviceInfo from './Home.DeviceInfo';
 import {deviceColors} from '@lib/colors/device';
@@ -25,6 +25,14 @@ const devicesInfo = [
     id: 3,
     deviceName: 'Device 3',
   },
+  {
+    id: 4,
+    deviceName: 'Device 4',
+  },
+  {
+    id: 5,
+    deviceName: 'Device 5',
+  },
 ];
 
 const Separator = () => <View style={{height: 12}} />;
@@ -32,6 +40,7 @@ const Separator = () => <View style={{height: 12}} />;
 const HomeDeviceInfoList = () => {
   const {device, selectedDevice, setSelectedDevice}: any =
     useContext(DeviceContext);
+  console.log(device[selectedDevice]);
   const {sendLocationRequest}: any = useContext(LocationContext);
 
   const enabledDevice = device.filter((element: any) => {
