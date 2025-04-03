@@ -33,11 +33,10 @@ const HomeDeviceInfo = ({
           </View>
           <View style={styles.deviceInfo}>
             <Text style={styles.deviceName}>{deviceName}</Text>
-            <Text style={styles.dateAdded}>Added: 2 months ago</Text>
+            <Text style={styles.dateAdded}>Added: 5 months ago</Text>
           </View>
         </View>
-        <Text style={styles.lastUpdate}>
-          {isLoadingLocation
+        <Text style={styles.lastUpdate}>Update: {isLoadingLocation
             ? null
             : moment.unix(location[index].payload.timestamp).fromNow()}
         </Text>

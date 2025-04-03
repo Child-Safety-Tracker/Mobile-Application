@@ -26,6 +26,14 @@ let devices = [
     label: 'Device 3',
     value: 2,
   },
+  {
+    label: 'Device 4',
+    value: 4,
+  },
+  {
+    label: 'Device 5',
+    value: 5,
+  },
 ];
 
 const AlertDeviceSelection = ({updateIndex}: any) => {

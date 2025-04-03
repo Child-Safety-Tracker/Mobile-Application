@@ -22,6 +22,14 @@ const deviceInfo = [
     id: 3,
     deviceName: 'Device 3',
   },
+  {
+    id: 4,
+    deviceName: 'Device 4',
+  },
+  {
+    id: 5,
+    deviceName: 'Device 5',
+  },
 ];
 
 const Separator = () => <View style={{height: 15}} />;
