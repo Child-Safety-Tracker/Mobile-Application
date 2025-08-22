@@ -45,7 +45,7 @@ const LocationContextProvider = ({children}: any) => {
 
   useEffect(() => {
     // Only call when the device is loaded
-    sendLocationRequest();
+    // sendLocationRequest();
   }, [device]);
 
   return (

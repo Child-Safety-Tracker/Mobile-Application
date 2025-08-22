@@ -6,7 +6,7 @@ import {dark} from '@lib/colors/theme';
 const AlertHeading = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Alert config</Text>
+      <Text style={styles.heading}>Child Finding</Text>
     </View>
   );
 };

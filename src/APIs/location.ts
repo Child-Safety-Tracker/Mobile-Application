@@ -1,9 +1,7 @@
 // @ts-ignore
-import {PRIVATE_SERVER_ADDRESS} from '@env';
-
 export const location_request = async (requestBody: any) => {
   console.log(requestBody);
-  return await fetch(PRIVATE_SERVER_ADDRESS + '/location', {
+  return await fetch('http://40.81.18.151:1234' + '/location', {
     method: 'POST',
     headers: {
       Accept: 'application/json',

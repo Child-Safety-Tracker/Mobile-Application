@@ -11,12 +11,11 @@ import CircleDot from '@assets/icons/screens/home/circle-dot.svg'
 import {deviceColorsDark} from '@lib/colors/device';
 
 // @ts-ignore
-import {OPEN_MAP_PUBLIC_KEY} from '@env';
 import {DeviceContext} from '../../../context/Device.context';
 import {Location7DaysContext} from '../../../context/Location7Days.context';
 import {light} from "../../../../lib/colors/theme";
 
-Mapbox.setAccessToken(OPEN_MAP_PUBLIC_KEY);
+Mapbox.setAccessToken('sk.eyJ1IjoidHVhbmtpZXQxNyIsImEiOiJjbWMxcjV0YnQwMGZnMmtzaTZseGNjbWx1In0.86_fpZTYg9DP3J2wK4kBIw');
 
 const HomeMap = ({showHistory}: {showHistory: boolean}) => {
   const {location, isLoadingLocation}: any = useContext(LocationContext);
