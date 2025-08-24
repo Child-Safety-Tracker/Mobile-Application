@@ -33,132 +33,132 @@ import {DeviceContext} from '../context/Device.context';
 import AlertStackNavigator from './Alert.Navigator';
 import DeviceManagementNavigator from './DeviceManagement.Navigator';
 import {AuthenticationContext} from '../context/Authentication.context';
-import NavigatorAuthentication from './Navigator.Authentication';
+import AuthenticationNavigator from './Authentication.Navigator';
 
 // Create a bottom tab navigator
 const Tab = createBottomTabNavigator();
 
 const Navigator = () => {
-  const {isLoadingDevice}: any = useContext(DeviceContext);
+    const {isLoadingDevice, isDebugMode}: any = useContext(DeviceContext);
 
-  const {isLoggedIn}: any = useContext(AuthenticationContext);
+    const {isLoggedIn}: any = useContext(AuthenticationContext);
 
-  return (
-    <NavigationContainer>
-      {!isLoggedIn ? (
-        <NavigatorAuthentication />
-      ) : isLoadingDevice ? null : (
-        <LocationContextProvider>
-          <Tab.Navigator
-            screenOptions={({route}) => ({
-              headerShown: false,
-              tabBarShowLabel: false,
-              tabBarStyle: {
-                backgroundColor: dark.colors.mantle.hex,
-              },
-              tabBarItemStyle: {
-                // A top padding of 5 to center the icon vertically
-                paddingTop: 5,
-              },
-              // Custom icons for the navigation bar
-              tabBarIcon: ({focused, size}) => {
-                let returnedIcon;
-                switch (route.name) {
-                  case 'Home':
-                    returnedIcon = focused ? (
-                      <HomeIconFill
-                        width={size}
-                        height={size}
-                        fill={dark.colors.teal.hex}
-                      />
-                    ) : (
-                      <HomeIconLine
-                        width={size}
-                        height={size}
-                        fill={dark.colors.text.hex}
-                      />
-                    );
-                    break;
-                  case 'Alert Navigator':
-                    returnedIcon = focused ? (
-                      <AlertIconFill
-                        width={size}
-                        height={size}
-                        fill={dark.colors.teal.hex}
-                      />
-                    ) : (
-                      <AlertIconLine
-                        width={size}
-                        height={size}
-                        fill={dark.colors.text.hex}
-                      />
-                    );
-                    break;
-                  case 'FindDevice':
-                    returnedIcon = focused ? (
-                      <FindDeviceIconFill
-                        width={size}
-                        height={size}
-                        fill={dark.colors.teal.hex}
-                      />
-                    ) : (
-                      <FindDeviceIconLine
-                        width={size}
-                        height={size}
-                        fill={dark.colors.text.hex}
-                      />
-                    );
-                    break;
-                  case 'DeviceManagement Navigator':
-                    returnedIcon = focused ? (
-                      <DevicesIconFill
-                        width={size}
-                        height={size}
-                        fill={dark.colors.teal.hex}
-                      />
-                    ) : (
-                      <DevicesIconLine
-                        width={size}
-                        height={size}
-                        fill={dark.colors.text.hex}
-                      />
-                    );
-                    break;
-                  case 'Setting':
-                    returnedIcon = focused ? (
-                      <SettingIconFill
-                        width={size}
-                        height={size}
-                        fill={dark.colors.teal.hex}
-                      />
-                    ) : (
-                      <SettingIconLine
-                        width={size}
-                        height={size}
-                        fill={dark.colors.text.hex}
-                      />
-                    );
-                    break;
-                }
-                return returnedIcon;
-              },
-            })}>
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen
-              name="Alert Navigator"
-              component={AlertStackNavigator}
-            />
-            <Tab.Screen name="FindDevice" component={FindDeviceScreen} />
-            <Tab.Screen
-              name="DeviceManagement Navigator"
-              component={DeviceManagementNavigator}
-            />
-            <Tab.Screen name="Setting" component={SettingScreen} />
-          </Tab.Navigator>
-        </LocationContextProvider>
-      )}
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            {!isLoggedIn ? (
+                <AuthenticationNavigator/>
+            ) : (isLoadingDevice && !isDebugMode) ? null : (
+                <LocationContextProvider>
+                    <Tab.Navigator
+                        screenOptions={({route}) => ({
+                            headerShown: false,
+                            tabBarShowLabel: false,
+                            tabBarStyle: {
+                                backgroundColor: dark.colors.mantle.hex,
+                            },
+                            tabBarItemStyle: {
+                                // A top padding of 5 to center the icon vertically
+                                paddingTop: 5,
+                            },
+                            // Custom icons for the navigation bar
+                            tabBarIcon: ({focused, size}) => {
+                                let returnedIcon;
+                                switch (route.name) {
+                                    case 'Home':
+                                        returnedIcon = focused ? (
+                                            <HomeIconFill
+                                                width={size}
+                                                height={size}
+                                                fill={dark.colors.teal.hex}
+                                            />
+                                        ) : (
+                                            <HomeIconLine
+                                                width={size}
+                                                height={size}
+                                                fill={dark.colors.text.hex}
+                                            />
+                                        );
+                                        break;
+                                    case 'Alert Navigator':
+                                        returnedIcon = focused ? (
+                                            <AlertIconFill
+                                                width={size}
+                                                height={size}
+                                                fill={dark.colors.teal.hex}
+                                            />
+                                        ) : (
+                                            <AlertIconLine
+                                                width={size}
+                                                height={size}
+                                                fill={dark.colors.text.hex}
+                                            />
+                                        );
+                                        break;
+                                    case 'FindDevice':
+                                        returnedIcon = focused ? (
+                                            <FindDeviceIconFill
+                                                width={size}
+                                                height={size}
+                                                fill={dark.colors.teal.hex}
+                                            />
+                                        ) : (
+                                            <FindDeviceIconLine
+                                                width={size}
+                                                height={size}
+                                                fill={dark.colors.text.hex}
+                                            />
+                                        );
+                                        break;
+                                    case 'DeviceManagement Navigator':
+                                        returnedIcon = focused ? (
+                                            <DevicesIconFill
+                                                width={size}
+                                                height={size}
+                                                fill={dark.colors.teal.hex}
+                                            />
+                                        ) : (
+                                            <DevicesIconLine
+                                                width={size}
+                                                height={size}
+                                                fill={dark.colors.text.hex}
+                                            />
+                                        );
+                                        break;
+                                    case 'Setting':
+                                        returnedIcon = focused ? (
+                                            <SettingIconFill
+                                                width={size}
+                                                height={size}
+                                                fill={dark.colors.teal.hex}
+                                            />
+                                        ) : (
+                                            <SettingIconLine
+                                                width={size}
+                                                height={size}
+                                                fill={dark.colors.text.hex}
+                                            />
+                                        );
+                                        break;
+                                }
+                                return returnedIcon;
+                            },
+                        })}>
+                        <Tab.Screen name="Home" component={HomeScreen}/>
+                        <Tab.Screen
+                            name="Alert Navigator"
+                            component={AlertStackNavigator}
+                        />
+                        <Tab.Screen name="FindDevice" component={FindDeviceScreen}/>
+                        <Tab.Screen
+                            name="DeviceManagement Navigator"
+                            component={DeviceManagementNavigator}
+                        />
+                        <Tab.Screen name="Setting" component={SettingScreen}/>
+                    </Tab.Navigator>
+                </LocationContextProvider>
+            )}
+        </NavigationContainer>
+    );
 };
 
 export default Navigator;

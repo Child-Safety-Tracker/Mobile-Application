@@ -5,7 +5,7 @@ import AuthenticationRegister from '../screens/authentication/Authentication.Reg
 
 const AuthenticationStack = createStackNavigator();
 
-const NavigatorAuthentication = () => {
+const AuthenticationNavigator = () => {
   return (
     <AuthenticationStack.Navigator
       screenOptions={{
@@ -23,4 +23,4 @@ const NavigatorAuthentication = () => {
   );
 };
 
-export default NavigatorAuthentication;
+export default AuthenticationNavigator;
