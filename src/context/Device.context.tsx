@@ -1,10 +1,13 @@
-import React, {createContext, useCallback, useEffect, useState,} from 'react';
+import React, {createContext, useCallback, useContext, useEffect, useState} from 'react';
 import {device_request, updateDeviceStatus} from '../APIs/device';
+import {AuthenticationContext} from "./Authentication.context";
 
 export const DeviceContext = createContext({});
 
 const DeviceContextProvider = ({children}: any) => {
-    console.log('Device Context Provider get rendered');
+    console.log('[Context] Device Context Provider get rendered');
+
+    const {isLoggedIn}: any = useContext(AuthenticationContext)
 
     const [device, setDevice] = useState([]);
     // Select device by index
@@ -46,7 +49,14 @@ const DeviceContextProvider = ({children}: any) => {
         const fetchData = async () => {
             await sendDeviceRequest();
         };
-    }, []);
+        if (isLoggedIn) {
+            fetchData();
+        } else {
+            // Clear user data on logs out
+            setDevice([])
+            setIsLoadingDevice(false)
+        }
+    }, [isLoggedIn]);
 
     return (
         <DeviceContext.Provider

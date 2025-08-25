@@ -43,7 +43,7 @@ const Location7DaysContextProvider = ({children}: any) => {
 
   useEffect(() => {
     // Only call when the device is loaded
-    sendLocation7DaysRequest();
+    // sendLocation7DaysRequest();
   }, [device]);
 
   return (
