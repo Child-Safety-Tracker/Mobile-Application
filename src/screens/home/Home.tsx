@@ -3,19 +3,17 @@ import {StyleSheet, Switch, Text, View} from 'react-native';
 
 import HomeHeading from './components/Home.Heading';
 import HomeMap from './components/Home.Map';
-
-// @ts-ignore
-import {dark} from '@lib/colors/theme.ts';
-// @ts-ignore
-// @ts-ignore
-import {fontSize} from '@lib/fontSize';
 import {DeviceContext} from '../../context/Device.context';
 import HomeDeviceInfoList from './components/Home.DeviceInfoList';
 import Location7DaysContextProvider from '../../context/Location7Days.context';
+// @ts-ignore
+import {dark} from '@lib/colors/theme.ts';
+// @ts-ignore
+import {fontSize} from '@lib/fontSize';
 
 let deviceNum = 2;
 const HomeScreen = () => {
-    const {isLoadingDevice, isDebugMode}: any = useContext(DeviceContext);
+    const {device, isLoadingDevice, isDebugMode}: any = useContext(DeviceContext);
     const [isEnabled, setIsEnabled]: any = useState();
 
     return (isLoadingDevice && !isDebugMode) ? null : (
@@ -31,11 +29,10 @@ const HomeScreen = () => {
             <View style={styles.deviceInfoContainer}>
                 <View style={styles.deviceInfoHeaderContainer}>
                     <Text style={styles.deviceInfoHeader}>
-                        Devices - <Text>{deviceNum}</Text>
+                        Devices - <Text>{device.length}</Text>
                     </Text>
                     <View style={styles.historyMovementContainer}>
                         <Text style={styles.historyMovementText}>History</Text>
-
                         <Switch
                             value={isEnabled}
                             trackColor={{

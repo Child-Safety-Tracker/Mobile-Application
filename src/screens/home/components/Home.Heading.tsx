@@ -6,7 +6,7 @@ import NotificationIconLine from '@assets/icons/screens/home/notification-line.s
 import {fontSize} from '@lib/fontSize';
 import {dark} from '@lib/colors/theme';
 
-let userName = 'Kiet';
+let userName = 'Tuan Hung';
 
 const HomeHeading = () => {
   return (
