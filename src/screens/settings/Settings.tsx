@@ -14,6 +14,7 @@ import EarthIconLine from '@assets/icons/screens/settings/earth-line.svg';
 import PencilIcon from '@assets/icons/screens/settings/pencil-fill.svg';
 // @ts-ignore
 import UserIcon from '@assets/icons/screens/settings/user-fill.svg';
+// @ts-ignore
 import NotificationIcon from '@assets/icons/screens/settings/notification-fill.svg';
 
 const SettingScreen = () => {
@@ -83,7 +84,7 @@ const SettingScreen = () => {
         <SettingsOption
           icon={<UserIcon width={20} height={20} fill={dark.colors.text.hex} />}
           label={'Username'}
-          value={'Tuan Kiet'}
+          value={'Tuan Hung'}
         />
         <Separator height={20} />
         <SettingsOption
@@ -91,7 +92,7 @@ const SettingScreen = () => {
             <PencilIcon width={20} height={20} fill={dark.colors.text.hex} />
           }
           label={'Email'}
-          value={'user@gmail.com'}
+          value={'thpttrungvuong@gmail.com'}
         />
       </View>
     </View>

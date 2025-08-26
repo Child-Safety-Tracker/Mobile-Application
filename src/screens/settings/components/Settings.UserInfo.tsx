@@ -11,14 +11,14 @@ const SettingsUserInfo = () => {
         <View style={styles.imageWrapper}>
           <Image
             style={styles.image}
-            source={require('@assets/images/test_user/user.jpeg')}
+            source={require('@assets/images/test_user/user2.jpeg')}
           />
         </View>
         <View style={styles.separator} />
       </View>
       <View style={styles.userInfoContainer}>
-        <Text style={styles.username}>Tuan Kiet</Text>
-        <Text style={styles.email}>user@gmail.com</Text>
+        <Text style={styles.username}>Tuan Hung</Text>
+        <Text style={styles.email}>thpttrungvuong@gmail.com</Text>
       </View>
     </View>
   );
