@@ -1,13 +1,11 @@
 import React, {useCallback, useContext, useState} from 'react';
-import {FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
+import {FlatList, RefreshControl, StyleSheet, TouchableOpacity, View,} from 'react-native';
 import HomeDeviceInfo from './Home.DeviceInfo';
 import {deviceColors} from '@lib/colors/device';
-import Inbox2Fill from '@assets/icons/screens/home/inbox-2-fill.svg'
 
 import {DeviceContext} from '../../../context/Device.context';
 import {LocationContext} from '../../../context/Location.context';
-
-import {dark} from '@lib/colors/theme.ts';
+import EmptyDevice from "../../../components/EmptyDevice";
 
 const devicesInfo = [
     {
@@ -55,11 +53,7 @@ const HomeDeviceInfoList = () => {
 
     // Check for empty device list
     if (!device.length) {
-        return (
-            <View style={styles.emptyDeviceScreen}>
-                <Inbox2Fill width={40} height={40} color={dark.colors.text.hex} opacity={0.65}/>
-                <Text style={styles.emptyDeviceText}>No device yet</Text></View>
-        )
+        return <EmptyDevice/>
         // Normal case
     } else {
         return (
@@ -97,16 +91,4 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    emptyDeviceScreen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingBottom: 20
-    },
-    emptyDeviceText: {
-        textAlign: 'center',
-        fontSize: 20,
-        color: dark.colors.text.hex,
-        opacity: 0.7
-    }
 });
